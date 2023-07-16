@@ -36,13 +36,29 @@ aside {
   font-family: system-ui;
 }
 
+.new-project-input {
+  text-align: center;
+  appearance: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  background-color: limegreen;
+}
+
+.new-project-input::placeholder {
+  color: rgba(24,24,24,0.4);
+  font-weight: bold;
+}
+
 ul {
   text-align: center;
   display: grid;
   list-style: none;
 }
 
-ul li {
+.aside-element-text {
   padding: 10px;
   cursor: pointer;
 }
