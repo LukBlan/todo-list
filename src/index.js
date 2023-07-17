@@ -1,5 +1,4 @@
-import {displayInitialPage} from "./asideControllerModule.js";
+import {displayNewProjectButtonOnAside} from "./asideViewController.js";
 import "./styles.css"
 
-displayInitialPage()
-console.log("Hola");
+displayNewProjectButtonOnAside()
