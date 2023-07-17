@@ -1,4 +1,4 @@
-import {displayNewProjectButtonOnAside} from "./asideViewController.js";
+import {displayNewProjectButton} from "./asideViewController.js";
 import "./styles.css"
 
-displayNewProjectButtonOnAside()
+displayNewProjectButton()
