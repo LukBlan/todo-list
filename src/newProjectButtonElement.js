@@ -6,7 +6,7 @@ const newProjectInputElement = generateInputElement();
 function generateNewProjectButton() {
   const liElement = document.createElement("li");
   const pElement = document.createElement("p");
-  pElement.innerText = "New Project";
+  pElement.innerText = "＋";
   pElement.classList.add("aside-element-text");
   pElement.addEventListener("click", replaceButton)
   liElement.append(pElement);
