@@ -5,6 +5,12 @@
   /* outline: 1px solid red */;
 }
 
+:root {
+  --primary-dark: #222;
+  --secondary-gray: #ddd;
+  --tertiary-gray: #eee;
+}
+
 body {
   display: grid;
   grid-template: min-content 9fr / 1fr 5fr;
@@ -21,14 +27,22 @@ h2 {
   font-size: 2rem;
 }
 
+h3 {
+  text-align: center;
+  background-color: var(--primary-dark);
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px;
+}
+
 nav {
-  background-color: #222;
+  background-color: var(--primary-dark);
   grid-column: 1 / 3;
   color: white;
 }
 
 aside {
-  background-color: #ddd;
+  background-color: var(--secondary-gray);
   grid-column: 1 / 2;
   grid-row: 2/ 3;
   font-weight: bold;
@@ -44,7 +58,7 @@ aside {
   font-weight: bold;
   border: none;
   padding: 10px;
-  background-color: limegreen;
+  background-color: var(--secondary-gray);;
 }
 
 .new-project-input::placeholder {
