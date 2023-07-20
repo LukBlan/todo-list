@@ -1,22 +1,34 @@
-import {emit} from "./pub-sub.js";
+import {emit, subscribe} from "./pub-sub.js";
 
 export {newProjectButtonElement}
 
-const newProjectButtonElement = generateNewProjectButton() ;
-const newProjectInputElement = generateInputElement();
+subscribe("newProject", changeInputToButton)
 
-function generateNewProjectButton() {
-  const liElement = document.createElement("li");
+const newProjectInputElement = generateInputElement();
+const newProjectParagraphElement = generatePElement();
+const newProjectButtonElement = generateNewProjectButton() ;
+
+function changeInputToButton() {
+  newProjectButtonElement.replaceChild(newProjectParagraphElement, newProjectInputElement);
+}
+
+function generatePElement() {
   const pElement = document.createElement("p");
   pElement.innerText = "＋";
   pElement.classList.add("aside-element-text");
   pElement.addEventListener("click", replaceButton)
-  liElement.append(pElement);
+  return pElement;
+}
+
+function generateNewProjectButton() {
+  const liElement = document.createElement("li");
+  liElement.append(newProjectParagraphElement);
   return liElement;
 }
 
 function replaceButton(event) {
   event.target.parentElement.replaceChild(newProjectInputElement, event.target);
+  newProjectInputElement.value = "";
   newProjectInputElement.focus();
 }
 
