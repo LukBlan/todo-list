@@ -2,14 +2,14 @@ import {subscribe, emit} from "./pub-sub";
 
 const projects = []
 
-subscribe("newProject", createNewProject)
+subscribe("checkNewProject", checkNewProject)
 
-function createNewProject(projectName) {
+function checkNewProject(projectName) {
   if (checkDuplicateProject(projectName)) {
     emit("duplicateProject", projectName);
   } else {
     generateNewProject(projectName);
-    //emit("newProjectAdd", projectName);
+    emit("newProject", projectName);
   }
 }
 

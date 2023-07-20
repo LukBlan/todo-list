@@ -17,6 +17,7 @@ function generateNewProjectButton() {
 
 function replaceButton(event) {
   event.target.parentElement.replaceChild(newProjectInputElement, event.target);
+  newProjectInputElement.focus();
 }
 
 function generateInputElement() {
@@ -31,6 +32,6 @@ function checkKeyPressed(event) {
   const keyPressed = event.key;
   if (keyPressed === "Enter") {
     const projectName = event.target.value;
-    emit("newProject", projectName);
+    emit("checkNewProject", projectName);
   }
 }
