@@ -126,7 +126,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./aside-view-controller.js */ \"./src/aside-view-controller.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\r\n\r\n\r\n(0,_aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__.displayNewProjectButton)()\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./aside-view-controller.js */ \"./src/aside-view-controller.js\");\n/* harmony import */ var _pub_sub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pub-sub.js */ \"./src/pub-sub.js\");\n/* harmony import */ var _project_database_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project-database.js */ \"./src/project-database.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\r\n\r\n\r\n\r\n\r\n(0,_pub_sub_js__WEBPACK_IMPORTED_MODULE_1__.subscribe)(\"duplicateProject\", function(projectName) {\r\n  alert(`Project ${projectName} already exist`);\r\n})\r\n\r\n;(0,_aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__.displayNewProjectButton)()\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -137,6 +137,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _asi
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   newProjectButtonElement: () => (/* binding */ newProjectButtonElement)\n/* harmony export */ });\n/* harmony import */ var _pub_sub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pub-sub.js */ \"./src/pub-sub.js\");\n\r\n\r\n\r\n\r\nconst newProjectButtonElement = generateNewProjectButton() ;\r\nconst newProjectInputElement = generateInputElement();\r\n\r\nfunction generateNewProjectButton() {\r\n  const liElement = document.createElement(\"li\");\r\n  const pElement = document.createElement(\"p\");\r\n  pElement.innerText = \"＋\";\r\n  pElement.classList.add(\"aside-element-text\");\r\n  pElement.addEventListener(\"click\", replaceButton)\r\n  liElement.append(pElement);\r\n  return liElement;\r\n}\r\n\r\nfunction replaceButton(event) {\r\n  event.target.parentElement.replaceChild(newProjectInputElement, event.target);\r\n}\r\n\r\nfunction generateInputElement() {\r\n  const newProjectInput =  document.createElement(\"input\");\r\n  newProjectInput.classList.add(\"new-project-input\");\r\n  newProjectInput.placeholder = \"Project Name\"\r\n  newProjectInput.addEventListener(\"keyup\", checkKeyPressed);\r\n  return newProjectInput;\r\n}\r\n\r\nfunction checkKeyPressed(event) {\r\n  const keyPressed = event.key;\r\n  if (keyPressed === \"Enter\") {\r\n    const projectName = event.target.value;\r\n    (0,_pub_sub_js__WEBPACK_IMPORTED_MODULE_0__.emit)(\"newProject\", projectName);\r\n  }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/new-project-button-element.js?");
+
+/***/ }),
+
+/***/ "./src/project-database.js":
+/*!*********************************!*\
+  !*** ./src/project-database.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pub_sub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pub-sub */ \"./src/pub-sub.js\");\n\r\n\r\nconst projects = []\r\n\r\n;(0,_pub_sub__WEBPACK_IMPORTED_MODULE_0__.subscribe)(\"newProject\", createNewProject)\r\n\r\nfunction createNewProject(projectName) {\r\n  if (checkDuplicateProject(projectName)) {\r\n    (0,_pub_sub__WEBPACK_IMPORTED_MODULE_0__.emit)(\"duplicateProject\", projectName);\r\n  } else {\r\n    generateNewProject(projectName);\r\n    //emit(\"newProjectAdd\", projectName);\r\n  }\r\n}\r\n\r\nfunction checkDuplicateProject(projectName) {\r\n  const allProjectNames = projects.map(project => project.name);\r\n  return allProjectNames.includes(projectName);\r\n}\r\n\r\nfunction generateNewProject(projectName) {\r\n  const newProject = {};\r\n  newProject.name = projectName;\r\n  newProject.todoList = [];\r\n  projects.push(newProject)\r\n}\n\n//# sourceURL=webpack://todo-list/./src/project-database.js?");
 
 /***/ }),
 
