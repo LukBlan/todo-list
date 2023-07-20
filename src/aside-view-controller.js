@@ -1,6 +1,8 @@
-import {newProjectButtonElement} from "./newProjectButtonElement.js"
+import {getService} from "./service-locator";
+
 export {displayNewProjectButton}
 
+const newProjectButtonElement = getService("newProjectButton");
 const projectListDomElement = document.querySelector(".project-list");
 
 function displayNewProjectButton() {
@@ -8,7 +10,7 @@ function displayNewProjectButton() {
 }
 
 function removeNewProjectButton() {
-  projectListDomElement.removeChild(projectListDomElement);
+  projectListDomElement.removeChild(newProjectButtonElement);
 }
 
 /*

@@ -110,13 +110,13 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
-/***/ "./src/asideViewController.js":
-/*!************************************!*\
-  !*** ./src/asideViewController.js ***!
-  \************************************/
+/***/ "./src/aside-view-controller.js":
+/*!**************************************!*\
+  !*** ./src/aside-view-controller.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   displayNewProjectButton: () => (/* binding */ displayNewProjectButton)\n/* harmony export */ });\n/* harmony import */ var _newProjectButtonElement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProjectButtonElement.js */ \"./src/newProjectButtonElement.js\");\n/* harmony import */ var _pub_sub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pub-sub.js */ \"./src/pub-sub.js\");\n\r\n\r\n\r\n\r\n;(0,_pub_sub_js__WEBPACK_IMPORTED_MODULE_1__.subscribe)(\"newProject\", mostrarPorPantalla)\r\n\r\nfunction mostrarPorPantalla(mensaje) {\r\n  console.log(mensaje)\r\n}\r\n\r\nconst projectListDomElement = document.querySelector(\".project-list\");\r\n\r\nfunction displayNewProjectButton() {\r\n  projectListDomElement.append(_newProjectButtonElement_js__WEBPACK_IMPORTED_MODULE_0__.newProjectButtonElement);\r\n}\r\n\r\nfunction removeNewProjectButton() {\r\n  projectListDomElement.removeChild(projectListDomElement);\r\n}\r\n\r\nfunction displayNewProject(newProjectDomElement) {\r\n  removeNewProjectButton();\r\n  newProjectDomElement.append(newProjectDomElement);\r\n  displayNewProjectButton();\r\n}\n\n//# sourceURL=webpack://todo-list/./src/asideViewController.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   displayNewProjectButton: () => (/* binding */ displayNewProjectButton)\n/* harmony export */ });\n/* harmony import */ var _service_locator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service-locator */ \"./src/service-locator.js\");\n\r\n\r\n\r\n\r\nconst newProjectButtonElement = (0,_service_locator__WEBPACK_IMPORTED_MODULE_0__.getService)(\"newProjectButton\");\r\nconst projectListDomElement = document.querySelector(\".project-list\");\r\n\r\nfunction displayNewProjectButton() {\r\n  projectListDomElement.append(newProjectButtonElement);\r\n}\r\n\r\nfunction removeNewProjectButton() {\r\n  projectListDomElement.removeChild(newProjectButtonElement);\r\n}\r\n\r\n/*\r\nfunction displayNewProject(newProjectDomElement) {\r\n  removeNewProjectButton();\r\n  newProjectDomElement.append(newProjectDomElement);\r\n  displayNewProjectButton();\r\n}\r\n */\n\n//# sourceURL=webpack://todo-list/./src/aside-view-controller.js?");
 
 /***/ }),
 
@@ -126,17 +126,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _asideViewController_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./asideViewController.js */ \"./src/asideViewController.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\r\n\r\n\r\n(0,_asideViewController_js__WEBPACK_IMPORTED_MODULE_0__.displayNewProjectButton)()\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./aside-view-controller.js */ \"./src/aside-view-controller.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\r\n\r\n\r\n(0,_aside_view_controller_js__WEBPACK_IMPORTED_MODULE_0__.displayNewProjectButton)()\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/newProjectButtonElement.js":
-/*!****************************************!*\
-  !*** ./src/newProjectButtonElement.js ***!
-  \****************************************/
+/***/ "./src/new-project-button-element.js":
+/*!*******************************************!*\
+  !*** ./src/new-project-button-element.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   newProjectButtonElement: () => (/* binding */ newProjectButtonElement)\n/* harmony export */ });\n/* harmony import */ var _pub_sub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pub-sub.js */ \"./src/pub-sub.js\");\n\r\n\r\n\r\n\r\nconst newProjectButtonElement = generateNewProjectButton() ;\r\nconst newProjectInputElement = generateInputElement();\r\n\r\nfunction generateNewProjectButton() {\r\n  const liElement = document.createElement(\"li\");\r\n  const pElement = document.createElement(\"p\");\r\n  pElement.innerText = \"＋\";\r\n  pElement.classList.add(\"aside-element-text\");\r\n  pElement.addEventListener(\"click\", replaceButton)\r\n  liElement.append(pElement);\r\n  return liElement;\r\n}\r\n\r\nfunction replaceButton(event) {\r\n  event.target.parentElement.replaceChild(newProjectInputElement, event.target);\r\n}\r\n\r\nfunction generateInputElement() {\r\n  const newProjectInput =  document.createElement(\"input\");\r\n  newProjectInput.classList.add(\"new-project-input\");\r\n  newProjectInput.placeholder = \"Project Name\"\r\n  newProjectInput.addEventListener(\"keyup\", checkKeyPressed);\r\n  return newProjectInput;\r\n}\r\n\r\nfunction checkKeyPressed(event) {\r\n  const keyPressed = event.key;\r\n  if (keyPressed === \"Enter\") {\r\n    const projectName = event.target.value;\r\n    (0,_pub_sub_js__WEBPACK_IMPORTED_MODULE_0__.emit)(\"newProject\", projectName);\r\n  }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/newProjectButtonElement.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   newProjectButtonElement: () => (/* binding */ newProjectButtonElement)\n/* harmony export */ });\n/* harmony import */ var _pub_sub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pub-sub.js */ \"./src/pub-sub.js\");\n\r\n\r\n\r\n\r\nconst newProjectButtonElement = generateNewProjectButton() ;\r\nconst newProjectInputElement = generateInputElement();\r\n\r\nfunction generateNewProjectButton() {\r\n  const liElement = document.createElement(\"li\");\r\n  const pElement = document.createElement(\"p\");\r\n  pElement.innerText = \"＋\";\r\n  pElement.classList.add(\"aside-element-text\");\r\n  pElement.addEventListener(\"click\", replaceButton)\r\n  liElement.append(pElement);\r\n  return liElement;\r\n}\r\n\r\nfunction replaceButton(event) {\r\n  event.target.parentElement.replaceChild(newProjectInputElement, event.target);\r\n}\r\n\r\nfunction generateInputElement() {\r\n  const newProjectInput =  document.createElement(\"input\");\r\n  newProjectInput.classList.add(\"new-project-input\");\r\n  newProjectInput.placeholder = \"Project Name\"\r\n  newProjectInput.addEventListener(\"keyup\", checkKeyPressed);\r\n  return newProjectInput;\r\n}\r\n\r\nfunction checkKeyPressed(event) {\r\n  const keyPressed = event.key;\r\n  if (keyPressed === \"Enter\") {\r\n    const projectName = event.target.value;\r\n    (0,_pub_sub_js__WEBPACK_IMPORTED_MODULE_0__.emit)(\"newProject\", projectName);\r\n  }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/new-project-button-element.js?");
 
 /***/ }),
 
@@ -147,6 +147,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   emit: () => (/* binding */ emit),\n/* harmony export */   subscribe: () => (/* binding */ subscribe)\n/* harmony export */ });\n\r\n\r\nconst events = {}\r\n\r\nfunction subscribe(eventName, handler) {\r\n  events[eventName] = events[eventName] || [];\r\n  events[eventName].push(handler);\r\n}\r\n\r\nfunction emit(eventName, data) {\r\n  events[eventName].forEach(handler => handler(data))\r\n}\n\n//# sourceURL=webpack://todo-list/./src/pub-sub.js?");
+
+/***/ }),
+
+/***/ "./src/service-locator.js":
+/*!********************************!*\
+  !*** ./src/service-locator.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getService: () => (/* binding */ getService)\n/* harmony export */ });\n/* harmony import */ var _new_project_button_element_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./new-project-button-element.js */ \"./src/new-project-button-element.js\");\n\r\n\r\n\r\n\r\nconst services = {}\r\n\r\nfunction newService(name, service) {\r\n  services[name] = service;\r\n}\r\n\r\nfunction getService(name) {\r\n  return services[name];\r\n}\r\n\r\nnewService(\"newProjectButton\", _new_project_button_element_js__WEBPACK_IMPORTED_MODULE_0__.newProjectButtonElement);\r\n\n\n//# sourceURL=webpack://todo-list/./src/service-locator.js?");
 
 /***/ })
 
