@@ -82,7 +82,9 @@ ul li:hover {
 }
 
 section {
+  display: grid;
   background-color: #eee;
   grid-column: 2 / 3;
   grid-row: 2/ 3;
+  grid-template-rows: min-content;
 }

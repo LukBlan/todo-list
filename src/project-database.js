@@ -3,6 +3,7 @@ import {subscribe, emit} from "./pub-sub";
 const projects = []
 
 subscribe("checkNewProject", checkNewProject)
+subscribe("renderProject", emitProjectTodos)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -27,6 +28,11 @@ function checkDuplicateProject(projectName) {
 function generateNewProject(projectName) {
   const newProject = {};
   newProject.name = projectName;
-  newProject.todoList = [];
+  newProject.todoList = [{name:"example", completed: true}];
   projects.push(newProject)
+}
+
+function emitProjectTodos(projectName) {
+  const project = projects.find(project => project.name === projectName);
+  emit("renderTodos", project.todoList)
 }
