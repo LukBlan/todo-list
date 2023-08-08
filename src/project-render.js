@@ -5,13 +5,12 @@ const title = document.querySelector("h2");
 const todoSection = document.querySelector(".todo-section");
 const todoFactory = getService("todoFactory");
 const todoButton = getService("newTodoButton");
-let currentProject = null
 
 subscribe("renderProject", renderTitle);
 subscribe("renderTodos", renderTodos);
 
 function renderTitle(projectName) {
-  currentProject = projectName;
+  todoFactory.setProjectName(projectName);
   title.innerText = projectName;
 }
 

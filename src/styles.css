@@ -117,3 +117,8 @@ section {
 .new-todo-button:active {
   border: inset;
 }
+
+.todo-input {
+  border: 1px solid black;
+  appearance: none;
+}
