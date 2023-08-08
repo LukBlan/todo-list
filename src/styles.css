@@ -118,12 +118,21 @@ section {
   border: inset;
 }
 
+.todo-name {
+  min-width: 50%;
+  border-radius: 5px;
+}
+
+.todo-name:hover {
+  background: #b9b9b9;
+}
+
 .todo-input {
   border-radius: 5px;
   appearance: none;
-  background: #b6d8bb;
+  background: #b9b9b9;
   border: none;
-  width: min-content;
+  width: 50%;
   font-weight: bold;
   box-shadow: 0 0 2px black;
   outline: none;

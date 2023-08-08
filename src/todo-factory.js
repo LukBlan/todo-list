@@ -7,7 +7,7 @@ class todoFactory {
     const todoContainer = this.#generateContainer();
     const todoName = this.#generateTodoName(todoObject.name);
     this.todoName = todoObject.name;
-    const todoDate = this.#generateTodoName("No Date");
+    const todoDate = this.#generateTodoDate();
 
     todoContainer.append(todoName);
     todoContainer.append(todoDate);
@@ -21,7 +21,14 @@ class todoFactory {
   #generateTodoName(name) {
     const todoNameContainer = document.createElement("p");
     todoNameContainer.innerText = name;
+    todoNameContainer.classList.add("todo-name");
     todoNameContainer.addEventListener("click", this.#changeToInput.bind(this));
+    return todoNameContainer;
+  }
+
+  #generateTodoDate() {
+    const todoNameContainer = document.createElement("p");
+    todoNameContainer.innerText = "No Date";
     return todoNameContainer;
   }
 
