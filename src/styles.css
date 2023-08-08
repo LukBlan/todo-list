@@ -119,6 +119,12 @@ section {
 }
 
 .todo-input {
-  border: 1px solid black;
+  border-radius: 5px;
   appearance: none;
+  background: #b6d8bb;
+  border: none;
+  width: min-content;
+  font-weight: bold;
+  box-shadow: 0 0 2px black;
+  outline: none;
 }

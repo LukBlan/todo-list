@@ -30,6 +30,7 @@ class todoFactory {
     console.log(todoName)
     const todoInput = this.#generateTodoInput(todoName);
     event.target.parentElement.replaceChild(todoInput, event.target);
+    todoInput.focus();
   }
 
   #generateContainer() {
