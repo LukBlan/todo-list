@@ -82,9 +82,23 @@ ul li:hover {
 }
 
 section {
-  display: grid;
   background-color: #eee;
-  grid-column: 2 / 3;
-  grid-row: 2/ 3;
-  grid-template-rows: min-content;
+}
+
+.todo-section {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: repeat(auto-fill, min-content);
+  padding: 10px;
+}
+
+.todo-element {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  background: lightgray;
+  border-radius: 10px;
 }
