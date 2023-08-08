@@ -4,6 +4,7 @@ import {getService} from "./service-locator";
 const title = document.querySelector("h2");
 const todoSection = document.querySelector(".todo-section");
 const todoFactory = getService("todoFactory");
+const todoButton = getService("newTodoButton");
 let currentProject = null
 
 subscribe("renderProject", renderTitle);
@@ -20,4 +21,5 @@ function renderTodos(todoList) {
     const todoElement = todoFactory.build(todo)
     todoSection.append(todoElement)
   })
+  todoSection.append(todoButton);
 }

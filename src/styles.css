@@ -82,6 +82,7 @@ ul li:hover {
 }
 
 section {
+  padding: 10px;
   background-color: #eee;
 }
 
@@ -90,6 +91,7 @@ section {
   justify-items: center;
   grid-template-rows: repeat(auto-fill, min-content);
   padding: 10px;
+  gap: 10px;
 }
 
 .todo-element {
@@ -101,4 +103,17 @@ section {
   font-weight: 900;
   background: lightgray;
   border-radius: 10px;
+  box-shadow: 0 0 3px rgba(0,0,0,40%);
+  cursor: pointer;
+}
+
+.new-todo-button {
+  background: lightgray;
+  padding: 4px;
+  border: outset 4px;
+  font-weight: bold;
+}
+
+.new-todo-button:active {
+  border: inset;
 }
