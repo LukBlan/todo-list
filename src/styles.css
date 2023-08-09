@@ -27,14 +27,16 @@ h2 {
   color: white;
   text-align: center;
   font-size: 4rem;
+  border: 10px inset white;
 }
 
 h3 {
+  background: white;
   text-align: center;
-  background-color: var(--primary-dark);
-  color: white;
-  font-size: 1.5rem;
-  padding: 5px;
+  font-size: 1.8rem;
+  padding: 3px;
+  color: var(--primary-dark);
+  border: inset 8px white;
 }
 
 nav {
@@ -50,6 +52,7 @@ aside {
   font-weight: bold;
   font-size: 1rem;
   font-family: system-ui;
+  border: 12px ridge white;
 }
 
 .new-project-input {
@@ -76,12 +79,16 @@ ul {
 
 .aside-element-text {
   padding: 10px;
+  border: 1px solid white;
   cursor: pointer;
+  background: var(--primary-dark);
+  color: white;
 }
 
-ul li:hover {
-  background-color: rgba(205,205,205,0.65);
+.aside-element-text:hover {
+  background-color: #474747;
 }
+
 
 section {
   border: 17px white ridge;
