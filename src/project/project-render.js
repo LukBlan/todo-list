@@ -1,5 +1,5 @@
-import {subscribe} from "./pub-sub";
-import {getService} from "./service-locator";
+import {subscribe} from "../pub-sub";
+import {getService} from "../service-locator";
 
 const title = document.querySelector("h2");
 const todoSection = document.querySelector(".todo-section");

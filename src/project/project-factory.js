@@ -1,4 +1,4 @@
-import {emit, subscribe} from "./pub-sub";
+import {emit, subscribe} from "../pub-sub";
 
 subscribe("newProject", createNewProjectDomElement);
 

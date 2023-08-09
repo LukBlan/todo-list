@@ -1,4 +1,4 @@
-import {getService} from "./service-locator";
+import {getService} from "../service-locator";
 
 export {newTodoButton}
 

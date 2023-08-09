@@ -1,9 +1,11 @@
-import {subscribe, emit} from "./pub-sub";
+import {subscribe, emit} from "../pub-sub";
+import {Project} from "./project-class";
 
 const projects = []
 
 subscribe("checkNewProject", checkNewProject)
 subscribe("renderProject", emitProjectTodos)
+subscribe("todoChange", updateTodo)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -26,13 +28,18 @@ function checkDuplicateProject(projectName) {
 }
 
 function generateNewProject(projectName) {
-  const newProject = {};
-  newProject.name = projectName;
-  newProject.todoList = [{name:"example", completed: true}];
+  const newProject = new Project(projectName);
   projects.push(newProject)
 }
 
 function emitProjectTodos(projectName) {
-  const project = projects.find(project => project.name === projectName);
-  emit("renderTodos", project.todoList)
+  const project = projects.find(project => project.checkName(projectName));
+  emit("renderTodos", project.todoList);
+}
+
+function updateTodo(todoObject) {
+  const project = projects.find(project => project.checkName(todoObject.project));
+  console.log(project)
+  project.updateTodo(todoObject);
+  console.log(project)
 }

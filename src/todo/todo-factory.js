@@ -1,4 +1,4 @@
-import {emit} from "./pub-sub";
+import {emit} from "../pub-sub";
 
 export {todoFactory}
 
@@ -54,6 +54,19 @@ class todoFactory {
     const todoInput = document.createElement("input");
     todoInput.value = inputContent;
     todoInput.classList.add("todo-input");
+    todoInput.addEventListener("keydown", this.#createNewTodo.bind(this));
     return todoInput;
+  }
+
+  #createNewTodo(event) {
+    const keyPressed = event.key;
+    if (keyPressed === "Enter") {
+      console.log(this);
+      const todoName = event.target.value;
+      emit(
+        "todoChange",
+        {project: this.projectName, oldTodoName:this.todoName, newTodoName:todoName}
+      )
+    }
   }
 }
