@@ -35,6 +35,7 @@ class todoFactory {
   #changeToInput(event) {
     const todoName = event.target.innerText;
     const todoInput = this.#generateTodoInput(todoName);
+    todoInput.placeholder = "New Todo Name"
     event.target.parentElement.replaceChild(todoInput, event.target);
     todoInput.focus();
   }

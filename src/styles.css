@@ -13,18 +13,20 @@
 
 body {
   display: grid;
-  grid-template: min-content 9fr / 1fr 5fr;
+  grid-template: min-content 9fr / 1.5fr 5fr;
   min-height: 100vh;
 }
 
 h1 {
   text-align: center;
-  font-size: 4rem;
+  font-size: 6rem;
 }
 
 h2 {
+  background: var(--primary-dark);
+  color: white;
   text-align: center;
-  font-size: 2rem;
+  font-size: 4rem;
 }
 
 h3 {
@@ -58,7 +60,7 @@ aside {
   font-weight: bold;
   border: none;
   padding: 10px;
-  background-color: var(--secondary-gray);;
+  background-color: var(--secondary-gray);
 }
 
 .new-project-input::placeholder {
@@ -82,7 +84,7 @@ ul li:hover {
 }
 
 section {
-  padding: 10px;
+  border: 17px white ridge;
   background-color: #eee;
 }
 
@@ -95,13 +97,14 @@ section {
 }
 
 .todo-element {
+  color: white;
   display: flex;
   width: 50%;
   justify-content: space-between;
   padding: 10px;
   font-size: 1.2rem;
   font-weight: 900;
-  background: lightgray;
+  background: var(--primary-dark);
   border-radius: 10px;
   box-shadow: 0 0 3px rgba(0,0,0,40%);
   cursor: pointer;
@@ -125,17 +128,18 @@ section {
 }
 
 .todo-name:hover {
-  background: #b9b9b9;
+  box-shadow: 0 0 1px white;
 }
 
 .todo-input {
+  color: white;
   text-align: center;
   border-radius: 5px;
   appearance: none;
-  background: #b9b9b9;
+  background: var(--primary-dark);
   border: none;
   width: 50%;
   font-weight: bold;
-  box-shadow: 0 0 2px black;
+  box-shadow: 0 0 1px white;
   outline: none;
 }
