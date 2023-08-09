@@ -33,8 +33,7 @@ class todoFactory {
   }
 
   #changeToInput(event) {
-    const todoName = this.todoName;
-    console.log(todoName)
+    const todoName = event.target.innerText;
     const todoInput = this.#generateTodoInput(todoName);
     event.target.parentElement.replaceChild(todoInput, event.target);
     todoInput.focus();
@@ -54,18 +53,20 @@ class todoFactory {
     const todoInput = document.createElement("input");
     todoInput.value = inputContent;
     todoInput.classList.add("todo-input");
-    todoInput.addEventListener("keydown", this.#createNewTodo.bind(this));
+    todoInput.addEventListener(
+      "keydown",
+      this.#createNewTodo.bind({todoObject:this, inputValue:inputContent})
+    );
     return todoInput;
   }
 
   #createNewTodo(event) {
     const keyPressed = event.key;
     if (keyPressed === "Enter") {
-      console.log(this);
       const todoName = event.target.value;
       emit(
         "todoChange",
-        {project: this.projectName, oldTodoName:this.todoName, newTodoName:todoName}
+        {project: this.todoObject.projectName, oldTodoName:this.inputValue, newTodoName:todoName}
       )
     }
   }

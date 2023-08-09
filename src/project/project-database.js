@@ -39,7 +39,6 @@ function emitProjectTodos(projectName) {
 
 function updateTodo(todoObject) {
   const project = projects.find(project => project.checkName(todoObject.project));
-  console.log(project)
   project.updateTodo(todoObject);
-  console.log(project)
+  emit("renderProject", todoObject.project);
 }
