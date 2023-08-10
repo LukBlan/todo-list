@@ -1,13 +1,18 @@
-import {emit} from "../pub-sub";
+import {emit} from "../../pub-sub";
+import {TodoDateFactory} from "./todo-date-factory";
 
 export {todoFactory}
 
 class todoFactory {
+
+  constructor() {
+    this.todoDateFactory = new TodoDateFactory();
+  }
+
   build(todoObject) {
     const todoContainer = this.#generateContainer();
     const todoName = this.#generateTodoName(todoObject.name);
-    this.todoName = todoObject.name;
-    const todoDate = this.#generateTodoDate();
+    const todoDate = this.todoDateFactory.generateTodoDate();
 
     todoContainer.append(todoName);
     todoContainer.append(todoDate);
@@ -23,12 +28,6 @@ class todoFactory {
     todoNameContainer.innerText = name;
     todoNameContainer.classList.add("todo-name");
     todoNameContainer.addEventListener("click", this.#changeToInput.bind(this));
-    return todoNameContainer;
-  }
-
-  #generateTodoDate() {
-    const todoNameContainer = document.createElement("p");
-    todoNameContainer.innerText = "No Date";
     return todoNameContainer;
   }
 

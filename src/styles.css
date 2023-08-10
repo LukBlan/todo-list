@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid red */;
+  /* outline: 1px solid red */
+  user-select: none;
 }
 
 :root {
@@ -106,15 +107,25 @@ section {
 .todo-element {
   color: white;
   display: flex;
-  width: 50%;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
+  width: 50%;
   font-size: 1.2rem;
   font-weight: 900;
   background: var(--primary-dark);
   border-radius: 10px;
   box-shadow: 0 0 3px rgba(0,0,0,40%);
   cursor: pointer;
+}
+
+.todo-element p {
+  text-align: center;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.todo-element p:hover {
+  box-shadow: 0 0 1px white;
 }
 
 .new-todo-button {
@@ -126,16 +137,6 @@ section {
 
 .new-todo-button:active {
   border: inset;
-}
-
-.todo-name {
-  text-align: center;
-  min-width: 50%;
-  border-radius: 5px;
-}
-
-.todo-name:hover {
-  box-shadow: 0 0 1px white;
 }
 
 .todo-input {
