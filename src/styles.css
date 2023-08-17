@@ -68,7 +68,8 @@ aside {
   background-color: var(--primary-dark);
 }
 
-.new-project-input::placeholder {
+.new-project-input::placeholder,
+#new-todo-input::placeholder {
   color: rgba(255, 255, 255, 0.15);
   font-weight: bold;
 }
@@ -150,4 +151,17 @@ section {
   font-weight: bold;
   box-shadow: 0 0 1px white;
   outline: none;
+}
+
+#new-todo-input {
+  text-align: center;
+  color: white;
+  padding: 10px;
+  width: 50%;
+  font-size: 1.2rem;
+  font-weight: 900;
+  background: var(--primary-dark);
+  border-radius: 10px;
+  box-shadow: 0 0 3px rgba(0,0,0,40%);
+  cursor: pointer;
 }

@@ -8,7 +8,7 @@ class TodoDateFactory {
   generateTodoDate() {
     const todoDateContainer = document.createElement("p");
     todoDateContainer.innerText = this.#getTodayDate()
-    todoDateContainer.addEventListener("click", this.#changeToInput.bind(this));
+    todoDateContainer.addEventListener("click", this.#changeToInput(this));
     return todoDateContainer;
   }
 
@@ -20,12 +20,13 @@ class TodoDateFactory {
     return `${year}-${formattedMonth}-${day}`
   }
 
-  #changeToInput(event) {
-    const date = event.target.innerText;
-    console.log(date)
-    const todoInput = this.#generateTodoInput(date);
-    event.target.parentElement.replaceChild(todoInput, event.target);
-    todoInput.focus();
+  #changeToInput(classObject) {
+    return function () {
+      const date = this.innerText;
+      const todoInput = classObject.#generateTodoInput(date);
+      this.parentElement.replaceChild(todoInput, this);
+      todoInput.focus();
+    }
   }
 
   #generateTodoInput(date) {

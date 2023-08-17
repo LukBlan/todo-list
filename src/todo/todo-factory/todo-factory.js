@@ -19,10 +19,6 @@ class todoFactory {
     return todoContainer;
   }
 
-  buildBoilerPlate() {
-    return this.build({name:""})
-  }
-
   #generateTodoName(name) {
     const todoNameContainer = document.createElement("p");
     todoNameContainer.innerText = name;

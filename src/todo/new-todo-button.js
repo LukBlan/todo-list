@@ -2,9 +2,9 @@ import {getService} from "../service-locator";
 
 export {newTodoButton}
 
-const newTodoButton = generateTodoButton();
+const newTodoButton = generateNewTodoButton();
 
-function generateTodoButton() {
+function generateNewTodoButton() {
   const newTodoButton = document.createElement("button");
   newTodoButton.innerText = "＋";
   newTodoButton.classList.add("new-todo-button");
@@ -13,12 +13,12 @@ function generateTodoButton() {
 }
 
 function generateTodoBoilerPlate() {
-  const todoFactory = getService("todoFactory");
-  return todoFactory.buildBoilerPlate();
+  const todoFactory = getService("newTodoFactory");
+  return todoFactory.newTodoInput();
 }
 
 function changeButton(event) {
   const parentElement = event.target.parentElement;
-  const todoBoilerPlate = generateTodoBoilerPlate();
-  parentElement.replaceChild(todoBoilerPlate, event.target);
+  const newTodoInput = generateTodoBoilerPlate();
+  parentElement.replaceChild(newTodoInput, newTodoButton);
 }

@@ -6,6 +6,7 @@ const projects = []
 subscribe("checkNewProject", checkNewProject)
 subscribe("renderProject", emitProjectTodos)
 subscribe("todoChange", updateTodo)
+subscribe("newTodo", createNewTodo)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -41,4 +42,8 @@ function updateTodo(todoObject) {
   const project = projects.find(project => project.checkName(todoObject.project));
   project.updateTodo(todoObject);
   emit("renderProject", todoObject.project);
+}
+
+function createNewTodo(todoName) {
+
 }
