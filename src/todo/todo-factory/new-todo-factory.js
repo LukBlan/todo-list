@@ -3,7 +3,7 @@ import {emit} from "../../pub-sub";
 export {NewTodoFactory}
 
 class NewTodoFactory {
-  newTodoInput() {
+  build() {
     const inputElement = document.createElement("input");
     inputElement.id = "new-todo-input";
     inputElement.placeholder = "New Todo"

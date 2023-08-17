@@ -1,24 +1,30 @@
 import {getService} from "../service-locator";
 
-export {newTodoButton}
+export {NewTodoButton}
 
-const newTodoButton = generateNewTodoButton();
+class NewTodoButton {
+  build(projectName) {
+    this.newTodoButton = this.#getNewTodoButton(projectName);
+  }
 
-function generateNewTodoButton() {
-  const newTodoButton = document.createElement("button");
-  newTodoButton.innerText = "＋";
-  newTodoButton.classList.add("new-todo-button");
-  newTodoButton.addEventListener("mouseup", changeButton);
-  return newTodoButton;
-}
+  #getNewTodoButton(projectName) {
+    const newTodoButton = document.createElement("button");
+    newTodoButton.innerText = "＋";
+    newTodoButton.classList.add("new-todo-button");
+    newTodoButton.addEventListener("mouseup", this.#changeButton(projectName, this));
+    return newTodoButton;
+  }
 
-function generateTodoBoilerPlate() {
-  const todoFactory = getService("newTodoFactory");
-  return todoFactory.newTodoInput();
-}
+  #changeButton(projectName, todoObject) {
+    return function (event) {
+      const parentElement = event.target.parentElement;
+      const newTodoInput = todoObject.#generateTodoBoilerPlate(projectName);
+      parentElement.replaceChild(newTodoInput, this.newTodoButton);
+    }
+  }
 
-function changeButton(event) {
-  const parentElement = event.target.parentElement;
-  const newTodoInput = generateTodoBoilerPlate();
-  parentElement.replaceChild(newTodoInput, newTodoButton);
+  #generateTodoBoilerPlate(projectName) {
+    const todoFactory = getService("newTodoFactory");
+    return todoFactory.newTodoInput();
+  }
 }
