@@ -4,7 +4,7 @@ import {Project} from "./project-class";
 const projects = []
 
 subscribe("checkNewProject", checkNewProject)
-subscribe("renderProject", emitProjectTodos)
+subscribe("getTodos", emitProjectTodos)
 subscribe("todoChange", updateTodo)
 subscribe("newTodo", createNewTodo)
 
@@ -45,6 +45,9 @@ function updateTodo(todoObject) {
 }
 
 function createNewTodo(newTodoObject) {
-  console.log(newTodoObject.project);
-  console.log(newTodoObject.todo);
+  const projectName = newTodoObject.project;
+  const todoName = newTodoObject.todo;
+  const project = projects.find(project => project.checkName(newTodoObject.project));
+  project.createNewTodo(todoName);
+  emit("renderProject", projectName);
 }

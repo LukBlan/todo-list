@@ -1,4 +1,4 @@
-import {subscribe} from "../pub-sub";
+import {emit, subscribe} from "../pub-sub";
 import {getService} from "../service-locator";
 
 const title = document.querySelector("h2");
@@ -11,6 +11,7 @@ subscribe("renderTodos", renderTodos);
 function renderTitle(projectName) {
   todoFactory.setProjectName(projectName);
   title.innerText = projectName;
+  emit("getTodos", projectName);
 }
 
 function renderTodos(todoList) {
