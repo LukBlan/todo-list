@@ -31,6 +31,7 @@ class TodoDateFactory {
 
   #generateTodoInput(date) {
     const inputElement = document.createElement("input");
+    inputElement.classList.add("date-input");
     inputElement.type = "date";
     inputElement.value = date;
     return inputElement;

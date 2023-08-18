@@ -111,12 +111,12 @@ section {
   justify-content: space-around;
   padding: 10px;
   width: 50%;
-  font-size: 1.2rem;
   font-weight: 900;
   background: var(--primary-dark);
   border-radius: 10px;
   box-shadow: 0 0 3px rgba(0,0,0,40%);
   cursor: pointer;
+  gap: 5px;
 }
 
 .todo-element p {
@@ -130,14 +130,16 @@ section {
 }
 
 .new-todo-button {
-  background: lightgray;
-  padding: 4px;
-  border: outset 4px;
+  color: white;
+  background: var(--primary-dark);
+  padding: 5px;
+  border: 1px outset white;
   font-weight: bold;
+  box-shadow: 0 3px 1px rgba(0,0,0,1.5);
 }
 
 .new-todo-button:active {
-  border: inset;
+  box-shadow: 0 1px 0 black;
 }
 
 .todo-input {
@@ -158,10 +160,18 @@ section {
   color: white;
   padding: 10px;
   width: 50%;
-  font-size: 1.2rem;
   font-weight: 900;
   background: var(--primary-dark);
   border-radius: 10px;
   box-shadow: 0 0 3px rgba(0,0,0,40%);
   cursor: pointer;
+}
+
+.date-input {
+  text-align: center;
+  width: 50%;
+  color: white;
+  background-color: var(--primary-dark);
+  border: 1px white;
+  box-shadow: 0 0 1px white;
 }
