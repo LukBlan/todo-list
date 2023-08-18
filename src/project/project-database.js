@@ -44,6 +44,7 @@ function updateTodo(todoObject) {
   emit("renderProject", todoObject.project);
 }
 
-function createNewTodo(todoName) {
-
+function createNewTodo(newTodoObject) {
+  console.log(newTodoObject.project);
+  console.log(newTodoObject.todo);
 }

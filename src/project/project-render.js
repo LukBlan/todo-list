@@ -14,8 +14,9 @@ function renderTitle(projectName) {
 }
 
 function renderTodos(todoList) {
-  const newTodoButtonFactory = getService("newTodoFactory");
-  const newTodoButton = newTodoButtonFactory.build(title);
+  const projectName = title.innerText;
+  const newTodoButtonFactory = getService("newTodoButton");
+  const newTodoButton = newTodoButtonFactory.build(projectName);
   todoSection.innerHTML = "";
   todoList.forEach(todo => {
     const todoElement = todoFactory.build(todo)

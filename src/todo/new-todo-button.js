@@ -5,6 +5,7 @@ export {NewTodoButton}
 class NewTodoButton {
   build(projectName) {
     this.newTodoButton = this.#getNewTodoButton(projectName);
+    return this.newTodoButton;
   }
 
   #getNewTodoButton(projectName) {
@@ -19,12 +20,12 @@ class NewTodoButton {
     return function (event) {
       const parentElement = event.target.parentElement;
       const newTodoInput = todoObject.#generateTodoBoilerPlate(projectName);
-      parentElement.replaceChild(newTodoInput, this.newTodoButton);
+      parentElement.replaceChild(newTodoInput, todoObject.newTodoButton);
     }
   }
 
   #generateTodoBoilerPlate(projectName) {
     const todoFactory = getService("newTodoFactory");
-    return todoFactory.newTodoInput();
+    return todoFactory.build(projectName);
   }
 }
