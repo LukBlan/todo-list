@@ -174,4 +174,6 @@ section {
   background-color: var(--primary-dark);
   border: 1px white;
   box-shadow: 0 0 1px white;
+  color-scheme: dark;
+  outline: none;
 }
