@@ -1,4 +1,4 @@
-import {emit} from "../../pub-sub";
+import {emit} from "../../others/pub-sub";
 
 export {NewTodoFactory}
 

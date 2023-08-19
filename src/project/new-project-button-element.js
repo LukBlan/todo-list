@@ -1,4 +1,4 @@
-import {emit, subscribe} from "../pub-sub.js";
+import {emit, subscribe} from "../others/pub-sub.js";
 
 export {newProjectButtonElement}
 

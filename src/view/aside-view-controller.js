@@ -1,5 +1,5 @@
-import {getService} from "./service-locator";
-import {subscribe, emit} from "./pub-sub";
+import {getService} from "../others/service-locator";
+import {subscribe, emit} from "../others/pub-sub";
 
 export {displayNewProjectButton}
 

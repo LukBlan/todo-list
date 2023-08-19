@@ -1,12 +1,13 @@
-import {subscribe, emit} from "../pub-sub";
+import {subscribe, emit} from "../others/pub-sub";
 import {Project} from "./project-class";
 
 const projects = []
 
 subscribe("checkNewProject", checkNewProject)
-subscribe("getTodos", emitProjectTodos)
+subscribe("projectChanged", emitProjectTodos)
 subscribe("todoChange", updateTodo)
 subscribe("newTodo", createNewTodo)
+subscribe("updateDate", updateTodoDate)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -34,12 +35,12 @@ function generateNewProject(projectName) {
 }
 
 function emitProjectTodos(projectName) {
-  const project = projects.find(project => project.checkName(projectName));
+  const project = getProject(projectName);
   emit("renderTodos", project.todoList);
 }
 
 function updateTodo(todoObject) {
-  const project = projects.find(project => project.checkName(todoObject.project));
+  const project = getProject(todoObject.project);
   project.updateTodo(todoObject);
   emit("renderProject", todoObject.project);
 }
@@ -47,7 +48,18 @@ function updateTodo(todoObject) {
 function createNewTodo(newTodoObject) {
   const projectName = newTodoObject.project;
   const todoName = newTodoObject.todo;
-  const project = projects.find(project => project.checkName(newTodoObject.project));
+  const project = getProject(projectName);
   project.createNewTodo(todoName);
   emit("renderProject", projectName);
+}
+
+function updateTodoDate(todoObject) {
+  const project = getProject(todoObject.project)
+  console.log(project);
+  project.changeTodoDate(todoObject.todo, todoObject.date)
+  emit("renderProject", todoObject.project);
+}
+
+function getProject(projectName) {
+  return projects.find(project => project.checkName(projectName));
 }

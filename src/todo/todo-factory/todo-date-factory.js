@@ -1,29 +1,26 @@
+import {emit, subscribe} from "../../others/pub-sub";
+import {getService} from "../../others/service-locator";
+
 export {TodoDateFactory}
 
 class TodoDateFactory {
   constructor() {
-    this.todayDate = new Date();
+    this.dateFormatter = getService("dateManager");
   }
 
-  generateTodoDate() {
+  generateTodoDate(date) {
     const todoDateContainer = document.createElement("p");
-    todoDateContainer.innerText = this.#getTodayDate()
+    todoDateContainer.innerText = this.dateFormatter.giveFormat(date, "d-m-y");
     todoDateContainer.addEventListener("click", this.#changeToInput(this));
     return todoDateContainer;
-  }
-
-  #getTodayDate() {
-    const year = this.todayDate.getFullYear();
-    const month = this.todayDate.getMonth() + 1
-    const formattedMonth = (month < 10)? `0${month}`: month;
-    const day = this.todayDate.getDate();
-    return `${year}-${formattedMonth}-${day}`
   }
 
   #changeToInput(classObject) {
     return function () {
       const date = this.innerText;
-      const todoInput = classObject.#generateTodoInput(date);
+      const formattedDate = classObject.dateFormatter.giveFormat(date, "y-m-d");
+      console.log(formattedDate);
+      const todoInput = classObject.#generateTodoInput(formattedDate);
       this.parentElement.replaceChild(todoInput, this);
       todoInput.focus();
     }
@@ -32,8 +29,19 @@ class TodoDateFactory {
   #generateTodoInput(date) {
     const inputElement = document.createElement("input");
     inputElement.classList.add("date-input");
+    inputElement.addEventListener("focusout", this.#updateTodo)
     inputElement.type = "date";
     inputElement.value = date;
     return inputElement;
+  }
+
+  #updateTodo(event) {
+    const projectElement = event.target.parentElement.firstChild
+    const todoName = projectElement.innerText || projectElement.value;
+    const todoDate = event.target.value.split("-").reverse().join("-");
+    const projectName = getService("getProjectName")();
+    console.log(projectName);
+    const updateTodoObject = {project:projectName, todo:todoName, date:todoDate};
+    emit("updateDate", updateTodoObject);
   }
 }

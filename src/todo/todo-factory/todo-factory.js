@@ -1,4 +1,4 @@
-import {emit} from "../../pub-sub";
+import {emit} from "../../others/pub-sub";
 import {TodoDateFactory} from "./todo-date-factory";
 
 export {todoFactory}
@@ -12,7 +12,7 @@ class todoFactory {
   build(todoObject) {
     const todoContainer = this.#generateContainer();
     const todoName = this.#generateTodoName(todoObject.name);
-    const todoDate = this.todoDateFactory.generateTodoDate();
+    const todoDate = this.todoDateFactory.generateTodoDate(todoObject.date);
 
     todoContainer.append(todoName);
     todoContainer.append(todoDate);

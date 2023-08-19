@@ -1,3 +1,5 @@
+import {getService} from "../others/service-locator";
+
 export {Project}
 
 class Project {
@@ -11,7 +13,7 @@ class Project {
   }
 
   updateTodo(todoObject) {
-    const todo = this.todoList.find(todoElement => todoElement.name === todoObject.oldTodoName);
+    const todo = this.getTodo(todoObject.oldTodoName);
     if (todo === undefined) {
       this.createNewTodo(todoObject.newTodoName);
     } else {
@@ -19,11 +21,22 @@ class Project {
     }
   }
 
+  getTodo(todoName) {
+    return this.todoList.find(todoElement => todoElement.name === todoName);
+  }
+
   createNewTodo(todoName) {
-    this.todoList.push({name: todoName, complete:false})
+    const dateManager = getService("dateManager");
+    const todayDate = dateManager.getTodayDate();
+    this.todoList.push({name: todoName, date: todayDate})
   }
 
   updateExitedTodo(todo, todoObject) {
     todo.name = todoObject.newTodoName;
+  }
+
+  changeTodoDate(todoName, newTodoDate) {
+    const todo = this.getTodo(todoName);
+    todo.date = newTodoDate;
   }
 }

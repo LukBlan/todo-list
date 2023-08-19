@@ -1,4 +1,4 @@
-import {getService} from "../service-locator";
+import {getService} from "../others/service-locator";
 
 export {NewTodoButton}
 
@@ -25,7 +25,7 @@ class NewTodoButton {
   }
 
   #generateTodoBoilerPlate(projectName) {
-    const todoFactory = getService("newTodoFactory");
-    return todoFactory.build(projectName);
+    const newTodoFactory = getService("newTodoFactory");
+    return newTodoFactory.build(projectName);
   }
 }

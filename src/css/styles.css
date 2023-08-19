@@ -130,6 +130,7 @@ section {
 }
 
 .new-todo-button {
+  position: relative;
   color: white;
   background: var(--primary-dark);
   padding: 5px;
@@ -139,6 +140,7 @@ section {
 }
 
 .new-todo-button:active {
+  top: 2px;
   box-shadow: 0 1px 0 black;
 }
 
