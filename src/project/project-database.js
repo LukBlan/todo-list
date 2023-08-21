@@ -6,7 +6,7 @@ const projects = []
 subscribe("checkNewProject", checkNewProject)
 subscribe("projectChanged", emitProjectTodos)
 subscribe("todoChange", updateTodo)
-subscribe("newTodo", createNewTodo)
+subscribe("newTodo", checkNewTodo)
 subscribe("updateDate", updateTodoDate)
 
 function checkNewProject(projectName) {
@@ -45,17 +45,25 @@ function updateTodo(todoObject) {
   emit("renderProject", todoObject.project);
 }
 
-function createNewTodo(newTodoObject) {
+function checkNewTodo(newTodoObject) {
   const projectName = newTodoObject.project;
   const todoName = newTodoObject.todo;
   const project = getProject(projectName);
+  const projectTodo = project.getTodo(todoName);
+  if (projectTodo === undefined) {
+    createNewTodo(project, todoName)
+  } else {
+    alert("Todo Already Exits")
+  }
+}
+
+function createNewTodo(project, todoName) {
   project.createNewTodo(todoName);
-  emit("renderProject", projectName);
+  emit("renderProject", project.name);
 }
 
 function updateTodoDate(todoObject) {
   const project = getProject(todoObject.project)
-  console.log(project);
   project.changeTodoDate(todoObject.todo, todoObject.date)
   emit("renderProject", todoObject.project);
 }
