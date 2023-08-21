@@ -14,11 +14,7 @@ class Project {
 
   updateTodo(todoObject) {
     const todo = this.getTodo(todoObject.oldTodoName);
-    if (todo === undefined) {
-      this.createNewTodo(todoObject.newTodoName);
-    } else {
-      this.updateExitedTodo(todo, todoObject)
-    }
+    this.updateExitedTodo(todo, todoObject)
   }
 
   getTodo(todoName) {

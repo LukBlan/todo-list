@@ -42,8 +42,14 @@ function emitProjectTodos(projectName) {
 
 function updateTodo(todoObject) {
   const project = getProject(todoObject.project);
-  project.updateTodo(todoObject);
-  emit("renderProject", todoObject.project);
+  const todoInProject = project.getTodo(todoObject.newTodoName)
+  if (todoInProject === undefined) {
+    project.updateTodo(todoObject);
+    emit("renderProject", todoObject.project);
+  } else {
+    alert("Todo Already Exits");
+  }
+
 }
 
 function checkNewTodo(newTodoObject) {
