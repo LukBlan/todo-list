@@ -6,7 +6,7 @@ class NewTodoFactory {
   build(projectName) {
     const inputElement = document.createElement("input");
     inputElement.id = "new-todo-input";
-    inputElement.placeholder = "New Todo"
+    inputElement.placeholder = "Todo Name"
     inputElement.addEventListener("keyup", this.#createNewTodo(projectName));
     return inputElement;
   }
