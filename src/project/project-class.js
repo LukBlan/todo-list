@@ -42,6 +42,6 @@ class Project {
 
   removeTodo(todoName) {
     const position = this.todoList.findIndex(todo => todo.name === todoName);
-    this.todoList.splice(position, position);
+    this.todoList.splice(position, 1);
   }
 }
