@@ -134,13 +134,14 @@ section {
 }
 
 .new-todo-button {
+  cursor: pointer;
   position: relative;
   color: white;
   background: var(--primary-dark);
   padding: 5px;
   border: 1px outset white;
   font-weight: bold;
-  box-shadow: 0 3px 1px rgba(0,0,0,1.5);
+  box-shadow: 0 3px 1px black;
 }
 
 .new-todo-button:active {
