@@ -39,4 +39,9 @@ class Project {
     const todo = this.getTodo(todoName);
     todo.date = newTodoDate;
   }
+
+  removeTodo(todoName) {
+    const position = this.todoList.findIndex(todo => todo.name === todoName);
+    this.todoList.splice(position, position);
+  }
 }

@@ -1,5 +1,6 @@
 import {emit} from "../../others/pub-sub";
 import {TodoDateFactory} from "./todo-date-factory";
+import {getService} from "../../others/service-locator";
 
 export {todoFactory}
 
@@ -13,10 +14,27 @@ class todoFactory {
     const todoContainer = this.#generateContainer();
     const todoName = this.#generateTodoName(todoObject.name);
     const todoDate = this.todoDateFactory.generateTodoDate(todoObject.date);
+    const deleteTodoButton = this.#generateDeleteTodoButton();
 
     todoContainer.append(todoName);
     todoContainer.append(todoDate);
+    todoContainer.append(deleteTodoButton);
     return todoContainer;
+  }
+
+  #generateDeleteTodoButton() {
+    const deleteTodoButton = document.createElement("button");
+    deleteTodoButton.innerText = "x";
+    deleteTodoButton.classList.add("delete-todo-button");
+    deleteTodoButton.addEventListener("click", this.#removeTodo);
+    return deleteTodoButton;
+  }
+
+  #removeTodo(event) {
+    const todoElement = event.target.parentElement.firstChild
+    const todo = todoElement.innerText
+    const project = getService("getProjectName")();
+    emit("removeTodo", {project,todo})
   }
 
   #generateTodoName(name) {

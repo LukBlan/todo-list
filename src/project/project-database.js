@@ -8,6 +8,7 @@ subscribe("projectChanged", emitProjectTodos)
 subscribe("todoChange", updateTodo)
 subscribe("newTodo", checkNewTodo)
 subscribe("updateDate", updateTodoDate)
+subscribe("removeTodo", removeTodo)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -66,6 +67,13 @@ function updateTodoDate(todoObject) {
   const project = getProject(todoObject.project)
   project.changeTodoDate(todoObject.todo, todoObject.date)
   emit("renderProject", todoObject.project);
+}
+
+function removeTodo(projectObject) {
+  const projectName = projectObject.project;
+  const project = getProject(projectName)
+  project.removeTodo(projectObject.todo);
+  emit("renderProject", projectName);
 }
 
 function getProject(projectName) {

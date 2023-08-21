@@ -109,7 +109,6 @@ section {
   color: white;
   display: flex;
   justify-content: space-around;
-  padding: 10px;
   width: 50%;
   font-weight: 900;
   background: var(--primary-dark);
@@ -119,14 +118,19 @@ section {
   gap: 5px;
 }
 
+.todo-element * {
+  padding: 10px;
+}
+
 .todo-element p {
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 50%;
 }
 
 .todo-element p:hover {
   box-shadow: 0 0 1px white;
+  background-color: rgb(53,53,53);
 }
 
 .new-todo-button {
@@ -147,7 +151,7 @@ section {
 .todo-input {
   color: white;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
   appearance: none;
   background: var(--primary-dark);
   border: none;
@@ -178,4 +182,14 @@ section {
   box-shadow: 0 0 1px white;
   color-scheme: dark;
   outline: none;
+}
+
+.delete-todo-button {
+  cursor: pointer;
+  appearance: none;
+  color: red;
+  background-color: white;
+  border-radius: 0 10px 10px 0;
+  border: none;
+  font-weight: bold;
 }
