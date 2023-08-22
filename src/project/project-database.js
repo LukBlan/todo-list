@@ -9,6 +9,7 @@ subscribe("todoChange", updateTodo)
 subscribe("newTodo", checkNewTodo)
 subscribe("updateDate", updateTodoDate)
 subscribe("removeTodo", removeTodo)
+subscribe("deleteProject", deleteProject)
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -17,9 +18,13 @@ function checkNewProject(projectName) {
     emit("duplicateProject", projectName);
   } else {
     createNewProject(projectName);
-    const projectsNames = projects.map(project => project.name);
-    emit("newProject", projectsNames);
+    renderProjects("newProject");
   }
+}
+
+function renderProjects(eventType) {
+  const projectsNames = projects.map(project => project.name);
+  emit(eventType, projectsNames);
 }
 
 function checkEmptyName(projectName) {
@@ -81,6 +86,12 @@ function removeTodo(projectObject) {
   const project = getProject(projectName)
   project.removeTodo(projectObject.todo);
   emit("renderProject", projectName);
+}
+
+function deleteProject(projectName) {
+  const position = projects.findIndex(project => project.name === projectName);
+  projects.splice(position, 1);
+  renderProjects("projectsUpdated");
 }
 
 function getProject(projectName) {

@@ -13,7 +13,7 @@ function changeInputToButton() {
 }
 
 function generatePElement() {
-  const pElement = document.createElement("p");
+  const pElement = document.createElement("div");
   pElement.innerText = "＋";
   pElement.classList.add("aside-element-text");
   pElement.addEventListener("click", replaceButton)

@@ -4,6 +4,7 @@ import {subscribe, emit} from "../others/pub-sub";
 export {displayNewProjectButton}
 
 subscribe("newProject", displayNewProject)
+subscribe("projectsUpdated", displayNewProject);
 
 const newProjectButtonElement = getService("newProjectButton");
 const projectListDomElement = document.querySelector(".project-list");
@@ -13,10 +14,6 @@ projectListDomElement.addEventListener("click", renderProject);
 
 function displayNewProjectButton() {
   projectListDomElement.append(newProjectButtonElement);
-}
-
-function removeNewProjectButton() {
-  projectListDomElement.removeChild(newProjectButtonElement);
 }
 
 function displayNewProject(projects) {
@@ -29,7 +26,7 @@ function displayNewProject(projects) {
 }
 
 function renderProject(event) {
-  if (event.target.nodeName === "LI") {
+  if (event.target.nodeName === "P") {
     const projectName = event.target.innerText;
     emit("renderProject", projectName);
   }

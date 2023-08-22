@@ -4,7 +4,7 @@ import {NewTodoFactory} from "../todo/todo-factory/new-todo-factory";
 import {NewTodoButton} from "../todo/new-todo-button";
 import {getProjectName} from "../project/current-project-name";
 import {dateManager} from "./dateManager";
-import {ProjectElementFactory} from "../project/project-factory";
+import {ProjectElementFactory} from "../project/project-element-factory";
 
 export {getService}
 

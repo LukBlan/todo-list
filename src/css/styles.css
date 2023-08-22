@@ -80,15 +80,25 @@ ul {
   list-style: none;
 }
 
-.aside-element-text {
-  padding: 10px;
+.aside-element-text,
+.project-aside-element {
+  position: relative;
   border: 1px solid white;
   cursor: pointer;
   background: var(--primary-dark);
   color: white;
 }
 
-.aside-element-text:hover {
+.aside-element-text {
+  padding: 10px;
+}
+
+.project-aside-element p {
+  padding: 10px;
+}
+
+.aside-element-text:hover,
+.project-aside-element:hover {
   background-color: #474747;
 }
 
@@ -193,4 +203,11 @@ section {
   border-radius: 0 10px 10px 0;
   border: none;
   font-weight: bold;
+}
+
+.delete-project-button {
+  cursor: pointer;
+  position: absolute;
+  top: 1%;
+  right: 1%;
 }

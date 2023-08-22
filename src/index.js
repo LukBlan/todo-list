@@ -1,7 +1,7 @@
 import {displayNewProjectButton} from "./view/aside-view-controller.js";
 import {subscribe} from "./others/pub-sub.js";
 import {} from "./project/project-database.js"
-import {} from "./project/project-factory.js"
+import {} from "./project/project-element-factory.js"
 import {} from "./view/project-render.js"
 import "./css/styles.css"
 

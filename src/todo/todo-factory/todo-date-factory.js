@@ -19,7 +19,6 @@ class TodoDateFactory {
     return function () {
       const date = this.innerText;
       const formattedDate = classObject.dateFormatter.giveFormat(date, "y-m-d");
-      console.log(formattedDate);
       const todoInput = classObject.#generateTodoInput(formattedDate);
       this.parentElement.replaceChild(todoInput, this);
       todoInput.focus();
@@ -40,7 +39,6 @@ class TodoDateFactory {
     const todoName = projectElement.innerText || projectElement.value;
     const todoDate = event.target.value.split("-").reverse().join("-");
     const projectName = getService("getProjectName")();
-    console.log(projectName);
     const updateTodoObject = {project:projectName, todo:todoName, date:todoDate};
     emit("updateDate", updateTodoObject);
   }
