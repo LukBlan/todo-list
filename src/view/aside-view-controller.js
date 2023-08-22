@@ -3,10 +3,11 @@ import {subscribe, emit} from "../others/pub-sub";
 
 export {displayNewProjectButton}
 
-subscribe("newProjectElement", displayNewProject)
+subscribe("newProject", displayNewProject)
 
 const newProjectButtonElement = getService("newProjectButton");
 const projectListDomElement = document.querySelector(".project-list");
+const projectElementFactory = getService("projectElementFactory");
 
 projectListDomElement.addEventListener("click", renderProject);
 
@@ -18,9 +19,12 @@ function removeNewProjectButton() {
   projectListDomElement.removeChild(newProjectButtonElement);
 }
 
-function displayNewProject(newProjectDomElement) {
-  removeNewProjectButton();
-  projectListDomElement.append(newProjectDomElement);
+function displayNewProject(projects) {
+  projectListDomElement.innerHTML = "";
+  projects.forEach(project => {
+    const projectElement = projectElementFactory.build(project);
+    projectListDomElement.append(projectElement);
+  })
   displayNewProjectButton();
 }
 

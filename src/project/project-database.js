@@ -16,8 +16,9 @@ function checkNewProject(projectName) {
   } else if (checkDuplicateProject(projectName)) {
     emit("duplicateProject", projectName);
   } else {
-    generateNewProject(projectName);
-    emit("newProject", projectName);
+    createNewProject(projectName);
+    const projectsNames = projects.map(project => project.name);
+    emit("newProject", projectsNames);
   }
 }
 
@@ -30,7 +31,7 @@ function checkDuplicateProject(projectName) {
   return allProjectNames.includes(projectName);
 }
 
-function generateNewProject(projectName) {
+function createNewProject(projectName) {
   const newProject = new Project(projectName);
   projects.push(newProject)
 }

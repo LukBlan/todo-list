@@ -4,6 +4,7 @@ import {NewTodoFactory} from "../todo/todo-factory/new-todo-factory";
 import {NewTodoButton} from "../todo/new-todo-button";
 import {getProjectName} from "../project/current-project-name";
 import {dateManager} from "./dateManager";
+import {ProjectElementFactory} from "../project/project-factory";
 
 export {getService}
 
@@ -17,6 +18,7 @@ function getService(name) {
   return services[name];
 }
 
+newService("projectElementFactory", new ProjectElementFactory());
 newService("dateManager", new dateManager());
 newService("getProjectName", getProjectName);
 newService("newTodoButton", new NewTodoButton());

@@ -1,10 +1,10 @@
-import {emit, subscribe} from "../others/pub-sub";
+export {ProjectElementFactory}
 
-subscribe("newProject", createNewProjectDomElement);
-
-function createNewProjectDomElement(projectName) {
-  const liElement = document.createElement("li");
-  liElement.innerText = projectName;
-  liElement.classList.add("aside-element-text");
-  emit("newProjectElement",liElement);
+class ProjectElementFactory {
+  build(projectName) {
+    const liElement = document.createElement("li");
+    liElement.innerText = projectName;
+    liElement.classList.add("aside-element-text");
+    return liElement;
+  }
 }
