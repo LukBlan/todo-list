@@ -7,8 +7,17 @@ const title = document.querySelector("h2");
 const todoSection = document.querySelector(".todo-section");
 
 function renderDom(renderObject) {
+  const projectList = renderObject.projectsList;
   title.innerText = renderObject.text;
   todoSection.innerHTML = "";
-  const projectCardFactory = getService("projectCardFactory");
-  console.log(renderObject.projectsList)
+  if (projectList !== null) {
+    const projectCardFactory = getService("projectCardFactory");
+    projectList.forEach(project => {
+      const projectCard = projectCardFactory.build(project)
+      todoSection.append(projectCard)
+    })
+  }
+
+
+
 }
