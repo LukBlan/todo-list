@@ -1,5 +1,6 @@
 import {subscribe, emit} from "../others/pub-sub";
 import {Project} from "./project-class";
+import {getService} from "../others/service-locator";
 
 const projects = []
 
@@ -10,6 +11,27 @@ subscribe("newTodo", checkNewTodo)
 subscribe("updateDate", updateTodoDate)
 subscribe("removeTodo", removeTodo)
 subscribe("deleteProject", deleteProject)
+subscribe("getTodayTodos", todayTodos);
+
+const dateFilter = {
+  Today: function () {
+    const dateManager = getService("dateManager");
+    const todayDate = dateManager.getTodayDate();
+    return projects.filter(project => project.getNumberOfTodosBetween(todayDate, todayDate))
+  },
+
+  Week: function () {
+    const dateManager = getService("dateManager");
+    const firstDayOfTheWeek = dateManager.getFirstDayWeek();
+    const lastDayOfTheWeek = dateManager.getLastDayWeek()
+    return projects.filter(project => project.getNumberOfTodosBetween(firstDayOfTheWeek, lastDayOfTheWeek))
+  }
+}
+
+function todayTodos(text) {
+  const projectsList = dateFilter[text]();
+  emit("renderTodayTodos", {text, projectsList});
+}
 
 function checkNewProject(projectName) {
   if (checkEmptyName(projectName)) {
@@ -95,7 +117,7 @@ function deleteProject(projectName) {
   renderProjects("projectsUpdated");
   const firstProject = projects[0];
   if (firstProject === undefined) {
-    console.log("No more projects");
+    emit("renderTodayTodos", {text:"Today", projectsList:null});
   } else {
     emit("renderProject", firstProject.name);
   }

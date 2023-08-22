@@ -24,7 +24,16 @@ class Project {
   createNewTodo(todoName) {
     const dateManager = getService("dateManager");
     const todayDate = dateManager.getTodayDate();
-    this.todoList.push({name: todoName, date: todayDate})
+    this.todoList.push({
+      name: todoName,
+      date: todayDate,
+      between: function (initialDate, endDate) {
+        const initialTime = dateManager.getDateWith(initialDate).getTime()
+        const endDateTime = dateManager.getDateWith(endDate).getTime();
+        const todoDateTime = dateManager.getDateWith(this.date).getTime();
+        return initialTime <= todoDateTime && todoDateTime <= endDateTime;
+      }
+    })
   }
 
   updateExitedTodo(todo, todoObject) {
@@ -39,5 +48,8 @@ class Project {
   removeTodo(todoName) {
     const position = this.todoList.findIndex(todo => todo.name === todoName);
     this.todoList.splice(position, 1);
+  }
+  getNumberOfTodosBetween(initialDate, endDate) {
+    return this.todoList.filter(todo => todo.between(initialDate, endDate)).length;
   }
 }

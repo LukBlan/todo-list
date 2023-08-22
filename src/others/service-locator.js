@@ -5,6 +5,7 @@ import {NewTodoButton} from "../todo/new-todo-button";
 import {getProjectName} from "../project/current-project-name";
 import {dateManager} from "./dateManager";
 import {ProjectElementFactory} from "../project/project-element-factory";
+import {ProjectCardFactory} from "../project/project-card-factory";
 
 export {getService}
 
@@ -25,3 +26,4 @@ newService("newTodoButton", new NewTodoButton());
 newService("todoFactory", new todoFactory());
 newService("newTodoFactory", new NewTodoFactory());
 newService("newProjectButton", newProjectButtonElement);
+newService("projectCardFactory", new ProjectCardFactory());
