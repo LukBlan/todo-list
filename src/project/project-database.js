@@ -19,6 +19,7 @@ function checkNewProject(projectName) {
   } else {
     createNewProject(projectName);
     renderProjects("newProject");
+    emit("renderProject", projectName);
   }
 }
 
@@ -92,6 +93,12 @@ function deleteProject(projectName) {
   const position = projects.findIndex(project => project.name === projectName);
   projects.splice(position, 1);
   renderProjects("projectsUpdated");
+  const firstProject = projects[0];
+  if (firstProject === undefined) {
+    console.log("No more projects");
+  } else {
+    emit("renderProject", firstProject.name);
+  }
 }
 
 function getProject(projectName) {

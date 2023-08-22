@@ -211,3 +211,7 @@ section {
   top: 1%;
   right: 1%;
 }
+
+.delete-project-button:hover {
+  color: indianred;
+}
