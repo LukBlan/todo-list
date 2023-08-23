@@ -49,7 +49,11 @@ class Project {
     const position = this.todoList.findIndex(todo => todo.name === todoName);
     this.todoList.splice(position, 1);
   }
-  getNumberOfTodosBetween(initialDate, endDate) {
-    return this.todoList.filter(todo => todo.between(initialDate, endDate)).length;
+
+  filterTodos(beginningDate, endDate) {
+    return {
+      name: this.name,
+      todoList: this.todoList.filter(todo => todo.between(beginningDate, endDate))
+    }
   }
 }

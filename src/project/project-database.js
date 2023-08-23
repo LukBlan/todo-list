@@ -17,14 +17,19 @@ const dateFilter = {
   Today: function () {
     const dateManager = getService("dateManager");
     const todayDate = dateManager.getTodayDate();
-    return projects.filter(project => project.getNumberOfTodosBetween(todayDate, todayDate))
+    return this.getProject(todayDate, todayDate);
   },
 
   Week: function () {
     const dateManager = getService("dateManager");
     const firstDayOfTheWeek = dateManager.getFirstDayWeek();
     const lastDayOfTheWeek = dateManager.getLastDayWeek()
-    return projects.filter(project => project.getNumberOfTodosBetween(firstDayOfTheWeek, lastDayOfTheWeek))
+    return this.getProject(firstDayOfTheWeek, lastDayOfTheWeek);
+  },
+
+  getProject: function (beginningDate, endDate) {
+    const projectList = projects.map(project => project.filterTodos(beginningDate, endDate));
+    return projectList.filter(project => project.todoList.length > 0);
   }
 }
 
