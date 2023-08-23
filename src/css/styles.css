@@ -238,6 +238,7 @@ section {
 }
 
 .project-card {
+  font-weight: bold;
   background-color: white;
   width: 50%;
   text-align: center;

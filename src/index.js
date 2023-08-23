@@ -4,6 +4,7 @@ import {} from "./project/project-database.js"
 import {} from "./project/project-element-factory.js"
 import {} from "./view/project-render.js"
 import {} from "./date-module-render/today-module.js"
+import {loadProjects} from "./others/local-storage";
 import {} from "./date-module-render/today-render.js"
 import "./css/styles.css"
 
@@ -16,4 +17,4 @@ subscribe("emptyProjectName", function() {
   alert(`Project name is empty`);
 })
 
-displayNewProjectButton()
+loadProjects();

@@ -1,8 +1,9 @@
 import {subscribe, emit} from "../others/pub-sub";
 import {Project} from "./project-class";
 import {getService} from "../others/service-locator";
+import {loadProjects} from "../others/local-storage";
 
-const projects = []
+let projects = []
 
 subscribe("checkNewProject", checkNewProject)
 subscribe("projectChanged", emitProjectTodos)
@@ -12,22 +13,23 @@ subscribe("updateDate", updateTodoDate)
 subscribe("removeTodo", removeTodo)
 subscribe("deleteProject", deleteProject)
 subscribe("getTodayTodos", todayTodos);
+subscribe("loadProjects", updateProjects)
 
 const dateFilter = {
-  Today: function () {
+  Today: function() {
     const dateManager = getService("dateManager");
     const todayDate = dateManager.getTodayDate();
     return this.getProject(todayDate, todayDate);
   },
 
-  Week: function () {
+  Week: function() {
     const dateManager = getService("dateManager");
     const firstDayOfTheWeek = dateManager.getFirstDayWeek();
     const lastDayOfTheWeek = dateManager.getLastDayWeek()
     return this.getProject(firstDayOfTheWeek, lastDayOfTheWeek);
   },
 
-  getProject: function (beginningDate, endDate) {
+  getProject: function(beginningDate, endDate) {
     const projectList = projects.map(project => project.filterTodos(beginningDate, endDate));
     return projectList.filter(project => project.todoList.length > 0);
   }
@@ -65,8 +67,9 @@ function checkDuplicateProject(projectName) {
 }
 
 function createNewProject(projectName) {
-  const newProject = new Project(projectName);
+  const newProject = new Project(projectName, []);
   projects.push(newProject)
+  emit("saveProjects", projects);
 }
 
 function emitProjectTodos(projectName) {
@@ -80,6 +83,7 @@ function updateTodo(todoObject) {
   if (todoInProject === undefined) {
     project.updateTodo(todoObject);
     emit("renderProject", todoObject.project);
+    emit("saveProjects", projects);
   } else {
     alert("Todo Already Exits");
   }
@@ -93,6 +97,7 @@ function checkNewTodo(newTodoObject) {
   const projectTodo = project.getTodo(todoName);
   if (projectTodo === undefined) {
     createNewTodo(project, todoName)
+    emit("saveProjects", projects);
   } else {
     alert("Todo Already Exits")
   }
@@ -107,6 +112,7 @@ function updateTodoDate(todoObject) {
   const project = getProject(todoObject.project)
   project.changeTodoDate(todoObject.todo, todoObject.date)
   emit("renderProject", todoObject.project);
+  emit("saveProjects", projects);
 }
 
 function removeTodo(projectObject) {
@@ -114,6 +120,7 @@ function removeTodo(projectObject) {
   const project = getProject(projectName)
   project.removeTodo(projectObject.todo);
   emit("renderProject", projectName);
+  emit("saveProjects", projects);
 }
 
 function deleteProject(projectName) {
@@ -126,8 +133,14 @@ function deleteProject(projectName) {
   } else {
     emit("renderProject", firstProject.name);
   }
+  emit("saveProjects", projects);
 }
 
 function getProject(projectName) {
   return projects.find(project => project.checkName(projectName));
+}
+
+function updateProjects(projectList) {
+  projects = projectList;
+  renderProjects("projectsUpdated");
 }

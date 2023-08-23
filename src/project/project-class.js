@@ -1,11 +1,12 @@
 import {getService} from "../others/service-locator";
+import {Todo} from "../todo/todo-class";
 
 export {Project}
 
 class Project {
-  constructor(name) {
+  constructor(name, todoList) {
     this.name = name;
-    this.todoList = []
+    this.todoList = todoList
   }
 
   checkName(projectName) {
@@ -22,18 +23,7 @@ class Project {
   }
 
   createNewTodo(todoName) {
-    const dateManager = getService("dateManager");
-    const todayDate = dateManager.getTodayDate();
-    this.todoList.push({
-      name: todoName,
-      date: todayDate,
-      between: function (initialDate, endDate) {
-        const initialTime = dateManager.getDateWith(initialDate).getTime()
-        const endDateTime = dateManager.getDateWith(endDate).getTime();
-        const todoDateTime = dateManager.getDateWith(this.date).getTime();
-        return initialTime <= todoDateTime && todoDateTime <= endDateTime;
-      }
-    })
+    this.todoList.push(new Todo(todoName))
   }
 
   updateExitedTodo(todo, todoObject) {
