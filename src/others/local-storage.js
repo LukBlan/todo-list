@@ -13,6 +13,8 @@ function loadProjects() {
       return new Project(project.name, project.todoList.map(todo => new Todo(todo.name)))
     });
     emit("loadProjects", projects);
+  } else {
+    emit("displayNewProjectButton", null);
   }
 }
 
