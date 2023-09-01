@@ -5,6 +5,10 @@ class dateManager {
     this.today = new Date();
   }
 
+  getDayOfMoths() {
+    return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  }
+
   getTodayDate() {
     const year = this.today.getFullYear();
     const month = this.today.getMonth() + 1
@@ -35,11 +39,20 @@ class dateManager {
   }
 
   getLastDayWeek() {
-    const month = this.today.getMonth() + 1;
+    let month = this.today.getMonth() + 1;
     const year = this.today.getFullYear();
-    const first = this.today.getDate() - this.today.getDay() + 1;
-    const last = first + 6;
-    return `${last}-${month}-${year}`
+    const todayDay = this.today.getDate();
+    const first = todayDay - this.today.getDay() + 1;
+
+    const dayOfMonths = this.getDayOfMoths();
+    const daysOfThisMonth = dayOfMonths[month];
+    const day = (todayDay + 6) % daysOfThisMonth;
+
+    if (day < todayDay) {
+      month++;
+    }
+
+    return `${day}-${month}-${year}`
   }
 }
 
