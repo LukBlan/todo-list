@@ -14,7 +14,8 @@ class dateManager {
     const month = this.today.getMonth() + 1
     const formattedMonth = (month < 10)? `0${month}`: month;
     const day = this.today.getDate();
-    return `${day}-${formattedMonth}-${year}`
+    const formattedDay = (day < 10)? `0${day}`: day; 
+    return `${formattedDay}-${formattedMonth}-${year}`
   }
 
   giveFormat(date, format) {
