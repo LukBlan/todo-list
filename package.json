@@ -3,19 +3,24 @@
   "version": "1.0.0",
   "description": "Todo List with npm and webpack",
   "main": "index.js",
+  "private": "true",
   "scripts": {
-    "build": "npx webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js",
     "subTree": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.8.1",
-    "eslint": "^8.47.0",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
-    "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4"
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

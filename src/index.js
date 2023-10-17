@@ -8,7 +8,6 @@ import {loadProjects} from "./others/local-storage";
 import {} from "./date-module-render/today-render.js"
 import "./css/styles.css"
 
-
 subscribe("duplicateProject", function(projectName) {
   alert(`Project ${projectName} already exist`);
 })
