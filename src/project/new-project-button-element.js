@@ -42,8 +42,9 @@ function generateInputElement() {
 
 function checkKeyPressed(event) {
   const keyPressed = event.key;
-  if (keyPressed === "Enter") {
-    const projectName = event.target.value;
+  const projectName = event.target.value;
+
+  if (keyPressed === "Enter" && projectName.length !== 0) {
     emit("checkNewProject", projectName);
   }
 }

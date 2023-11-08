@@ -41,9 +41,7 @@ function todayTodos(text) {
 }
 
 function checkNewProject(projectName) {
-  if (checkEmptyName(projectName)) {
-    emit("emptyProjectName", null);
-  } else if (checkDuplicateProject(projectName)) {
+  if (checkDuplicateProject(projectName)) {
     emit("duplicateProject", projectName);
   } else {
     createNewProject(projectName);
@@ -55,10 +53,6 @@ function checkNewProject(projectName) {
 function renderProjects(eventType) {
   const projectsNames = projects.map(project => project.name);
   emit(eventType, projectsNames);
-}
-
-function checkEmptyName(projectName) {
-  return projectName.length === 0;
 }
 
 function checkDuplicateProject(projectName) {
