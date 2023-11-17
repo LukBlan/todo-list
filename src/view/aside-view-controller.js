@@ -1,32 +1,32 @@
-import {getService} from "../others/service-locator";
-import {subscribe, emit} from "../others/pub-sub";
+import { getService } from '../others/service-locator';
+import { subscribe, emit } from '../others/pub-sub';
 
-subscribe("newProject", displayNewProject)
-subscribe("projectsUpdated", displayNewProject);
-subscribe("displayNewProjectButton", appendNewProjectButton)
-
-const newProjectButtonElement = getService("newProjectButton");
-const projectListDomElement = document.querySelector(".project-list");
-const projectElementFactory = getService("projectElementFactory");
-
-projectListDomElement.addEventListener("click", renderProject);
+const newProjectButtonElement = getService('newProjectButton');
+const projectListDomElement = document.querySelector('.project-list');
+const projectElementFactory = getService('projectElementFactory');
 
 function appendNewProjectButton() {
   projectListDomElement.append(newProjectButtonElement);
 }
 
 function displayNewProject(projects) {
-  projectListDomElement.innerHTML = "";
-  projects.forEach(project => {
+  projectListDomElement.innerHTML = '';
+  projects.forEach((project) => {
     const projectElement = projectElementFactory.build(project);
     projectListDomElement.append(projectElement);
-  })
+  });
   appendNewProjectButton();
 }
 
 function renderProject(event) {
-  if (event.target.nodeName === "P") {
+  if (event.target.nodeName === 'P') {
     const projectName = event.target.innerText;
-    emit("renderProject", projectName);
+    emit('renderProject', projectName);
   }
 }
+
+projectListDomElement.addEventListener('click', renderProject);
+
+subscribe('newProject', displayNewProject);
+subscribe('projectsUpdated', displayNewProject);
+subscribe('displayNewProjectButton', appendNewProjectButton);

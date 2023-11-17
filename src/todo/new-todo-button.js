@@ -1,6 +1,4 @@
-import {getService} from "../others/service-locator";
-
-export {NewTodoButton}
+import { getService } from '../others/service-locator';
 
 class NewTodoButton {
   build(projectName) {
@@ -9,23 +7,25 @@ class NewTodoButton {
   }
 
   #getNewTodoButton(projectName) {
-    const newTodoButton = document.createElement("button");
-    newTodoButton.innerText = "＋";
-    newTodoButton.classList.add("new-todo-button");
-    newTodoButton.addEventListener("mouseup", this.#changeButton(projectName, this));
+    const newTodoButton = document.createElement('button');
+    newTodoButton.innerText = '＋';
+    newTodoButton.classList.add('new-todo-button');
+    newTodoButton.addEventListener('mouseup', this.#changeButton(projectName, this));
     return newTodoButton;
   }
 
   #changeButton(projectName, todoObject) {
     return function (event) {
-      const parentElement = event.target.parentElement;
+      const { parentElement } = event.target;
       const newTodoInput = todoObject.#generateTodoBoilerPlate(projectName);
       parentElement.replaceChild(newTodoInput, todoObject.newTodoButton);
-    }
+    };
   }
 
   #generateTodoBoilerPlate(projectName) {
-    const newTodoFactory = getService("newTodoFactory");
+    const newTodoFactory = getService('newTodoFactory');
     return newTodoFactory.build(projectName);
   }
 }
+
+export { NewTodoButton };

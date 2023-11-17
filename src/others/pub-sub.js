@@ -1,6 +1,4 @@
-export {subscribe, emit}
-
-const events = {}
+const events = {};
 
 function subscribe(eventName, handler) {
   events[eventName] = events[eventName] || [];
@@ -8,5 +6,7 @@ function subscribe(eventName, handler) {
 }
 
 function emit(eventName, data) {
-  events[eventName].forEach(handler => handler(data))
+  events[eventName].forEach((handler) => handler(data));
 }
+
+export { subscribe, emit };

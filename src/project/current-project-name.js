@@ -1,9 +1,6 @@
-import {subscribe} from "../others/pub-sub";
-export {getProjectName}
+import { subscribe } from '../others/pub-sub';
 
-subscribe("projectChanged", setProjectName);
-
-let currentProjectName = null
+let currentProjectName = null;
 
 function setProjectName(name) {
   currentProjectName = name;
@@ -12,3 +9,7 @@ function setProjectName(name) {
 function getProjectName() {
   return currentProjectName;
 }
+
+subscribe('projectChanged', setProjectName);
+
+export { getProjectName };

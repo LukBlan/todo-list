@@ -1,13 +1,11 @@
-import {emit} from "../others/pub-sub";
+import { emit } from '../others/pub-sub';
 
-const today = document.querySelector(".timed-option");
-
-today.addEventListener("click", renderTodayTodos);
+const today = document.querySelector('.timed-option');
 
 function renderTodayTodos(event) {
-  if (event.target.nodeName === "P") {
-    emit("getTodayTodos", event.target.innerText);
+  if (event.target.nodeName === 'P') {
+    emit('getTodayTodos', event.target.innerText);
   }
-
 }
 
+today.addEventListener('click', renderTodayTodos);

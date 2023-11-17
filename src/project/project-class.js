@@ -1,12 +1,10 @@
-import {getService} from "../others/service-locator";
-import {Todo} from "../todo/todo-class";
-
-export {Project}
+import { getService } from '../others/service-locator';
+import { Todo } from '../todo/todo-class';
 
 class Project {
   constructor(name, todoList) {
     this.name = name;
-    this.todoList = todoList
+    this.todoList = todoList;
   }
 
   checkName(projectName) {
@@ -15,15 +13,15 @@ class Project {
 
   updateTodo(todoObject) {
     const todo = this.getTodo(todoObject.oldTodoName);
-    this.updateExitedTodo(todo, todoObject)
+    this.updateExitedTodo(todo, todoObject);
   }
 
   getTodo(todoName) {
-    return this.todoList.find(todoElement => todoElement.name === todoName);
+    return this.todoList.find((todoElement) => todoElement.name === todoName);
   }
 
   createNewTodo(todoName) {
-    this.todoList.push(new Todo(todoName))
+    this.todoList.push(new Todo(todoName));
   }
 
   updateExitedTodo(todo, todoObject) {
@@ -36,14 +34,16 @@ class Project {
   }
 
   removeTodo(todoName) {
-    const position = this.todoList.findIndex(todo => todo.name === todoName);
+    const position = this.todoList.findIndex((todo) => todo.name === todoName);
     this.todoList.splice(position, 1);
   }
 
   filterTodos(beginningDate, endDate) {
     return {
       name: this.name,
-      todoList: this.todoList.filter(todo => todo.between(beginningDate, endDate))
-    }
+      todoList: this.todoList.filter((todo) => todo.between(beginningDate, endDate)),
+    };
   }
 }
+
+export { Project };

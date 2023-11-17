@@ -1,11 +1,8 @@
-import {emit} from "../../others/pub-sub";
-import {TodoDateFactory} from "./todo-date-factory";
-import {getService} from "../../others/service-locator";
+import { emit } from '../../others/pub-sub';
+import { TodoDateFactory } from './todo-date-factory';
+import { getService } from '../../others/service-locator';
 
-export {todoFactory}
-
-class todoFactory {
-
+class TodoFactory {
   constructor() {
     this.todoDateFactory = new TodoDateFactory();
   }
@@ -23,39 +20,39 @@ class todoFactory {
   }
 
   #generateDeleteTodoButton() {
-    const deleteTodoButton = document.createElement("button");
-    deleteTodoButton.innerText = "x";
-    deleteTodoButton.classList.add("delete-todo-button");
-    deleteTodoButton.addEventListener("click", this.#removeTodo);
+    const deleteTodoButton = document.createElement('button');
+    deleteTodoButton.innerText = 'x';
+    deleteTodoButton.classList.add('delete-todo-button');
+    deleteTodoButton.addEventListener('click', this.#removeTodo);
     return deleteTodoButton;
   }
 
   #removeTodo(event) {
-    const todoElement = event.target.parentElement.firstChild
-    const todo = todoElement.innerText
-    const project = getService("getProjectName")();
-    emit("removeTodo", {project,todo})
+    const todoElement = event.target.parentElement.firstChild;
+    const todo = todoElement.innerText;
+    const project = getService('getProjectName')();
+    emit('removeTodo', { project, todo });
   }
 
   #generateTodoName(name) {
-    const todoNameContainer = document.createElement("p");
+    const todoNameContainer = document.createElement('p');
     todoNameContainer.innerText = name;
-    todoNameContainer.classList.add("todo-name");
-    todoNameContainer.addEventListener("click", this.#changeToInput.bind(this));
+    todoNameContainer.classList.add('todo-name');
+    todoNameContainer.addEventListener('click', this.#changeToInput.bind(this));
     return todoNameContainer;
   }
 
   #changeToInput(event) {
     const todoName = event.target.innerText;
     const todoInput = this.#generateTodoInput(todoName);
-    todoInput.placeholder = "New Todo Name"
+    todoInput.placeholder = 'New Todo Name';
     event.target.parentElement.replaceChild(todoInput, event.target);
     todoInput.focus();
   }
 
   #generateContainer() {
-    const container = document.createElement("div");
-    container.classList.add("todo-element");
+    const container = document.createElement('div');
+    container.classList.add('todo-element');
     return container;
   }
 
@@ -64,24 +61,30 @@ class todoFactory {
   }
 
   #generateTodoInput(inputContent) {
-    const todoInput = document.createElement("input");
+    const todoInput = document.createElement('input');
     todoInput.value = inputContent;
-    todoInput.classList.add("todo-input");
+    todoInput.classList.add('todo-input');
     todoInput.addEventListener(
-      "keydown",
-      this.#createNewTodo.bind({todoObject:this, inputValue:inputContent})
+      'keydown',
+      this.#createNewTodo.bind({ todoObject: this, inputValue: inputContent }),
     );
     return todoInput;
   }
 
   #createNewTodo(event) {
     const keyPressed = event.key;
-    if (keyPressed === "Enter") {
+
+    if (keyPressed === 'Enter') {
       const todoName = event.target.value;
-      emit(
-        "todoChange",
-        {project: this.todoObject.projectName, oldTodoName:this.inputValue, newTodoName:todoName}
-      )
+      const todoObject = {
+        project: this.todoObject.projectName,
+        oldTodoName: this.inputValue,
+        newTodoName: todoName,
+      };
+
+      emit('todoChange', todoObject);
     }
   }
 }
+
+export { TodoFactory };
