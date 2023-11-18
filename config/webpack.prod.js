@@ -14,7 +14,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'main-[contenthash].js',
-    assetModuleFilename: 'images/[name]-[hash].[ext]',
+    assetModuleFilename: (pathData) => {
+      const extension = path.dirname(pathData.filename).split('/').slice(-1)[0];
+      return `${extension}/[name]-[hash][ext]`;
+    },
   },
 
   entry: {
