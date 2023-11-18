@@ -14,6 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'main-[contenthash].js',
+    assetModuleFilename: 'images/[name]-[hash].[ext]',
   },
 
   entry: {
@@ -38,6 +39,8 @@ module.exports = {
   module: {
     rules: [
       { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+      { test: /\.html$/, use: ['html-loader'] },
+      { test: /\.svg$/, type: 'asset/resource' },
     ],
   },
 };

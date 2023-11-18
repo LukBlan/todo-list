@@ -6,7 +6,7 @@ import {} from './view/project-render';
 import {} from './date-module-render/today-module';
 import { loadProjects } from './others/local-storage';
 import {} from './date-module-render/today-render';
-import './css/styles.css';
+import './styles.css';
 
 subscribe('duplicateProject', (projectName) => {
   alert(`Project ${projectName} already exist`);
