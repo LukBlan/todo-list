@@ -1,6 +1,6 @@
-require_relative 'game.rb'
+require_relative '../domain/game.rb'
 
-class UserInterface
+class ConsoleInterface
   def initialize
     @game = Game.new
   end
