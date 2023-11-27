@@ -15,4 +15,8 @@ class Game
     @board = Board.new(3)
   end
 
+  def get_board_with_valid_moves
+    @board.get_valid_moves
+  end
+
 end

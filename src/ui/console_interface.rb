@@ -9,6 +9,7 @@ class ConsoleInterface
     self.show_welcome_message
     self.configure_players
     self.configure_grid
+    self.game_loop
   end
 
   def show_welcome_message
@@ -24,5 +25,21 @@ class ConsoleInterface
 
   def configure_grid
     @game.create_grid
+  end
+
+  def game_loop
+    self.display_board_with_valid_moves
+    #self.execute_turn
+    #self.display_board
+  end
+
+  def display_board_with_valid_moves
+    puts("Make a move")
+    puts "---------------"
+    board_with_valid_moves = @game.get_board_with_valid_moves
+    board_with_valid_moves.each do |row|
+      row.each { |element| print " #{element}"}
+      puts
+    end
   end
 end
