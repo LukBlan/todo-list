@@ -4,7 +4,7 @@ class Board
   def initialize(size)
     grid_builder = Proc.new do |grid_size|
       grid = []
-      grid_size.times { grid << :_ }
+      grid_size.times { grid << :- }
       grid
     end
 
@@ -16,7 +16,7 @@ class Board
 
     @grid.map do |row|
       row.map do |element|
-        if element == :_
+        if element == :-
           current_move = move
           move += 1
           current_move
@@ -29,7 +29,7 @@ class Board
 
   def count_white_space
     @grid.reduce(0) do |sum, row|
-      sum += row.count { |element| element == :_ }
+      sum += row.count { |element| element == :- }
     end
   end
 

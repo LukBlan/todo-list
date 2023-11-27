@@ -34,8 +34,7 @@ class ConsoleInterface
   end
 
   def display_board_with_valid_moves
-    puts("Make a move: ")
-    puts "---------------"
+    puts("Valid Moves: ")
     board_with_valid_moves = @game.get_board_with_valid_moves
     display_board(board_with_valid_moves)
   end
@@ -47,9 +46,34 @@ class ConsoleInterface
   end
 
   def display_board(board)
-    board.each do |row|
-      row.each { |element| print " #{element}"}
+    puts
+
+    board.each_with_index do |row, row_index|
+      row.each_with_index do |element, column_index|
+        txt = " #{element} "
+
+        if column_index != row.length - 1
+          txt += "|"
+        end
+        print txt
+      end
+
       puts
+      if row_index != board.length - 1
+        line_separator = self.get_line_separator(row.length)
+        puts line_separator
+      end
     end
+
+    puts
+  end
+
+  def get_line_separator(elements)
+    line_separator = ""
+    dash_amount = elements * 4 - 1
+
+    dash_amount.times { line_separator += "-" }
+
+    line_separator
   end
 end
