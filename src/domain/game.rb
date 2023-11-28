@@ -12,29 +12,43 @@ class Game
     @players << HumanPlayer.new(symbol)
   end
 
+  def valid_move?(move)
+    @board.valid_move?(move)
+  end
+
+  def next_turn
+    @turn_order = (@turn_order + 1) % @players.length
+  end
+
   def create_grid
     @board = Board.new(3)
   end
 
-  def get_board_with_valid_moves
+  def get_board_with_moves
     @board.get_valid_moves_grid
   end
 
-  def execute_turn
-    valid_range = self.get_valid_move_range
-    player = @players[@turn_order]
-    player_move = player.play_turn(valid_range)
-    player_mark = player.mark
-    @board.mark_grid(player_move, player_mark)
+  def get_current_player
+    @players[@turn_order]
   end
 
-  def get_valid_move_range
-    max_move_range = @board.count_white_space
-    (1..max_move_range)
+  def execute_turn
+    player = get_current_player
+    player.play_turn
+  end
+
+  def mark_grid(move)
+    player = get_current_player
+    mark = player.mark
+    @board.mark_grid(move, mark)
   end
 
   def get_board
     @board.grid
+  end
+
+  def over?
+    @board.count_white_space == 0
   end
 
 end

@@ -5,15 +5,8 @@ class HumanPlayer
     @mark = symbol
   end
 
-  def play_turn(range)
+  def play_turn
     print("Choose Move: ")
-    user_move = gets.chomp.to_i
-
-    if !range.to_a.include?(user_move)
-      puts("Invalid move")
-      user_move = play_turn(range)
-    end
-
-    user_move
+    gets.chomp.to_i
   end
 end

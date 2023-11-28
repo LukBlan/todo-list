@@ -9,6 +9,7 @@ class ConsoleInterface
     self.show_welcome_message
     self.configure_players
     self.configure_grid
+    self.show_rules
     self.game_loop
   end
 
@@ -20,23 +21,44 @@ class ConsoleInterface
 
   def configure_players
     @game.add_human_player("x")
-    @game.add_human_player("0")
+    @game.add_human_player("o")
   end
 
   def configure_grid
     @game.create_grid
   end
 
-  def game_loop
-    self.display_board_with_valid_moves
-    @game.execute_turn
-    self.display_result_board
+  def show_rules
+    puts("Rules: ")
+    puts("  - Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win")
+    puts("  - During the game give one of the following valid moves that are not already marked")
+    self.display_board_with_moves
   end
 
-  def display_board_with_valid_moves
-    puts("Valid Moves: ")
-    board_with_valid_moves = @game.get_board_with_valid_moves
-    display_board(board_with_valid_moves)
+  def game_loop
+    while !@game.over?
+      move = self.get_player_move
+      @game.mark_grid(move)
+      @game.next_turn
+      self.display_result_board
+    end
+  end
+
+  def get_player_move
+    loop do
+      move = @game.execute_turn
+
+      if @game.valid_move?(move)
+        return move
+      end
+
+      puts "Invalid Move: Try Again"
+    end
+  end
+
+  def display_board_with_moves
+    board_with_moves = @game.get_board_with_moves
+    display_board(board_with_moves)
   end
 
   def display_result_board
