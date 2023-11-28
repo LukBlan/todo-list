@@ -60,11 +60,35 @@ class Board
   end
 
   def check_grid
-    check_rows
+    check_rows(@grid) || check_columns || check_diagonals
   end
 
-  def check_rows
-    @grid.each do |row|
+  def check_columns
+    check_rows(@grid.transpose)
+  end
+
+  def check_diagonals
+    diagonal(@grid) || diagonal(@grid.reverse)
+  end
+
+  def diagonal(grid)
+    i = 0
+    first_element = grid[i][i]
+    count = 0
+
+    grid.each do
+      if grid[i][i] == first_element && first_element != WHITE_SPACE
+        count += 1
+      end
+
+      i += 1
+    end
+
+    count == 3
+  end
+
+  def check_rows(grid)
+    grid.each do |row|
       first_element = row[0]
       count = 0
 
