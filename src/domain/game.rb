@@ -2,10 +2,13 @@ require_relative 'human_player'
 require_relative 'board'
 
 class Game
+  attr_reader :result
+
   def initialize
     @players = []
     @board = nil
     @turn_order = 0
+    @result = nil
   end
 
   def add_human_player(symbol)
@@ -48,7 +51,25 @@ class Game
   end
 
   def over?
-    @board.count_white_space == 0
+    out_of_space = @board.count_white_space == 0
+    winner = @board.check_grid
+
+    if out_of_space
+      result = "Tie"
+    end
+
+    if winner
+      winner = get_last_player
+      mark = winner.mark
+      @result = "Winner #{mark}"
+    end
+
+    out_of_space || winner
+  end
+
+  def get_last_player
+    position = (@turn_order - 1) % @players.size
+    @players[position]
   end
 
 end

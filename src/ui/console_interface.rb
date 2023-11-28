@@ -11,6 +11,13 @@ class ConsoleInterface
     self.configure_grid
     self.show_rules
     self.game_loop
+    self.display_result
+  end
+
+  def display_result
+    result = @game.result
+    puts("Game Over!")
+    puts(result)
   end
 
   def show_welcome_message

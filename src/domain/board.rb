@@ -59,4 +59,27 @@ class Board
     end
   end
 
+  def check_grid
+    check_rows
+  end
+
+  def check_rows
+    @grid.each do |row|
+      first_element = row[0]
+      count = 0
+
+      row.each do |element|
+        if element == first_element && element != WHITE_SPACE
+          count += 1
+        end
+      end
+
+      if count == 3
+        return true
+      end
+    end
+
+    false
+  end
+
 end
