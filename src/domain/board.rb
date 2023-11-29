@@ -14,12 +14,15 @@ class Board
   end
 
   def valid_move?(move)
-    move > 0 && (move <= @size * @size) && is_not_marked(move)
+    greater_than_zero = move > 0
+    less_than_cell_amounts = (move <= @size * @size)
+    not_marked = is_not_marked(move)
+    greater_than_zero && less_than_cell_amounts && not_marked
   end
 
   def is_not_marked(move)
     row = (move - 1) / @size
-    column = (move - 1) % 3
+    column = (move - 1) % @size
     @grid[row][column] == WHITE_SPACE
   end
 
