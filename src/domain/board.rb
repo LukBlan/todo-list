@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Board
   attr_reader :current_valid_move_range, :grid
   WHITE_SPACE = :-
@@ -74,19 +72,32 @@ class Board
   end
 
   def diagonal(grid)
-    i = 0
-    first_element = grid[i][i]
-    count = 0
+    start_position = 0
 
-    grid.each do
-      if grid[i][i] == first_element && first_element != WHITE_SPACE
-        count += 1
+    loop do
+      position = start_position
+      first_element = grid[position][position]
+      count = 0
+
+      3.times do
+        if grid[position][position] == first_element && first_element != WHITE_SPACE
+          count += 1
+        end
+
+        position += 1
       end
 
-      i += 1
+      if count == 3
+        return true
+      end
+
+      start_position += 1
+      if start_position + 2 > grid.length - 1
+        break
+      end
     end
 
-    count == 3
+    false
   end
 
   def check_rows(grid)
@@ -106,11 +117,10 @@ class Board
           position += 1
         end
 
-        #debugger
         if count == 3
           return true
         end
-        
+
         start_position += 1
         if start_position + 2 > row.length - 1
           break

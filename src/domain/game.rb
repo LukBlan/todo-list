@@ -9,7 +9,7 @@ class Game
     @players = []
     @board = nil
     @turn_order = 0
-    @marks = ["-", " "]
+    @marks = ["-", " ", "|"]
     @result = nil
   end
 
