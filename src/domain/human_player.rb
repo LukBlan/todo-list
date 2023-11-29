@@ -6,7 +6,7 @@ class HumanPlayer
   end
 
   def play_turn
-    print("Choose Move: ")
+    print("#{@mark} turn: ")
     gets.chomp.to_i
   end
 end

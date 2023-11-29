@@ -14,6 +14,7 @@ class Game
   end
 
   def add_human_player(symbol)
+    @marks << symbol
     @players << HumanPlayer.new(symbol)
   end
 

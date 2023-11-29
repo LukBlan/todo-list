@@ -42,7 +42,7 @@ class ConsoleInterface
     players_total.times do |number|
       loop do
         print("      -> Player #{number + 1} mark: ")
-        mark = gets.chomp
+        mark = gets.chomp.downcase
 
         if @game.valid_mark(mark)
           break

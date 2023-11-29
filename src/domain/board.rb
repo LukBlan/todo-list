@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Board
   attr_reader :current_valid_move_range, :grid
   WHITE_SPACE = :-
@@ -88,18 +90,32 @@ class Board
   end
 
   def check_rows(grid)
-    grid.each do |row|
-      first_element = row[0]
-      count = 0
+    grid.each_with_index do |row, row_index|
+      start_position = 0
 
-      row.each do |element|
-        if element == first_element && element != WHITE_SPACE
-          count += 1
+      loop do
+        count = 0
+        position = start_position
+        element = row[start_position]
+
+        3.times do
+          if row[position] == element && element != WHITE_SPACE
+            count += 1
+          end
+
+          position += 1
         end
-      end
 
-      if count == 3
-        return true
+        #debugger
+        if count == 3
+          return true
+        end
+        
+        start_position += 1
+        if start_position + 2 > row.length - 1
+          break
+        end
+
       end
     end
 
