@@ -8,6 +8,7 @@ class Game
     @players = []
     @board = nil
     @turn_order = 0
+    @marks = ["-", " "]
     @result = nil
   end
 
@@ -44,6 +45,10 @@ class Game
     player = get_current_player
     mark = player.mark
     @board.mark_grid(move, mark)
+  end
+
+  def valid_mark(mark)
+    mark.length == 1 && !@marks.include?(mark)
   end
 
   def get_board

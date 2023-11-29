@@ -1,17 +1,25 @@
 require_relative '../domain/game.rb'
 
 class ConsoleInterface
+  MAX_AMOUNT_PLAYERS = 6
+
   def initialize
     @game = Game.new
+    @marks = ["-"]
   end
 
   def init
     self.show_welcome_message
-    self.configure_players
-    self.configure_grid
+    self.configure
     self.show_rules
     self.game_loop
     self.display_result
+  end
+
+  def configure
+    puts("Configuration is starting...")
+    self.configure_players
+    self.configure_grid
   end
 
   def display_result
@@ -24,11 +32,40 @@ class ConsoleInterface
     puts("------------------------")
     puts(" Welcome to Tic Tac Toe")
     puts("------------------------")
+    puts
   end
 
   def configure_players
-    @game.add_human_player("x")
-    @game.add_human_player("o")
+    mark = nil
+    players_total = get_total_players
+
+    players_total.times do |number|
+      loop do
+        print("      + Write board mark of player #{number}: ")
+        mark = gets.chomp
+
+        if @game.valid_mark(mark)
+          break
+        end
+
+        puts("Invalid board mark try again")
+      end
+
+      @game.add_human_player(mark)
+    end
+  end
+
+  def get_total_players
+    loop do
+      print("  - How many players do you want to add? (Max #{MAX_AMOUNT_PLAYERS}): ")
+      players_amount = gets.chomp.to_i
+
+      if players_amount >= 2 && players_amount <= MAX_AMOUNT_PLAYERS
+        return players_amount
+      end
+
+      puts("Incorrect amount, Try again")
+    end
   end
 
   def configure_grid
