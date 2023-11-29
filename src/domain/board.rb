@@ -9,7 +9,7 @@ class Board
       grid
     end
 
-    @grid = Array.new(3) { grid_builder.call(size) }
+    @grid = Array.new(size) { grid_builder.call(size) }
     @size = size
   end
 

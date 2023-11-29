@@ -18,8 +18,8 @@ class ConsoleInterface
 
   def configure
     puts("Configuration is starting...")
-    self.configure_players
     self.configure_grid
+    self.configure_players
   end
 
   def display_result
@@ -41,7 +41,7 @@ class ConsoleInterface
 
     players_total.times do |number|
       loop do
-        print("      + Write board mark of player #{number}: ")
+        print("      -> Player #{number + 1} mark: ")
         mark = gets.chomp
 
         if @game.valid_mark(mark)
@@ -57,7 +57,7 @@ class ConsoleInterface
 
   def get_total_players
     loop do
-      print("  - How many players do you want to add? (Max #{MAX_AMOUNT_PLAYERS}): ")
+      print_format_message("Number of Players? (Max #{MAX_AMOUNT_PLAYERS}): ")
       players_amount = gets.chomp.to_i
 
       if players_amount >= 2 && players_amount <= MAX_AMOUNT_PLAYERS
@@ -69,13 +69,26 @@ class ConsoleInterface
   end
 
   def configure_grid
-    @game.create_grid
+    size = nil
+
+    loop do
+      print_format_message("Grid size? (Max: #{@game.max_grid_size}): ")
+      size = gets.chomp.to_i
+
+      if size >= 3 && size <= @game.max_grid_size
+        break
+      end
+
+      puts("Invalid grid size, try again")
+    end
+
+    @game.create_grid(size)
   end
 
   def show_rules
     puts("Rules: ")
-    puts("  - Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win")
-    puts("  - During the game give one of the following valid moves that are not already marked")
+    print_format_message("Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win\n")
+    print_format_message("During the game give one of the following valid moves that are not already marked\n")
     self.display_board_with_moves
   end
 
@@ -141,5 +154,9 @@ class ConsoleInterface
     dash_amount.times { line_separator += "-" }
 
     line_separator
+  end
+
+  def print_format_message(message)
+    print("  - #{message}")
   end
 end

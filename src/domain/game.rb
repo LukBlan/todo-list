@@ -2,6 +2,7 @@ require_relative 'human_player'
 require_relative 'board'
 
 class Game
+  MAX_GRID_SIZE = 6
   attr_reader :result
 
   def initialize
@@ -16,6 +17,10 @@ class Game
     @players << HumanPlayer.new(symbol)
   end
 
+  def max_grid_size
+    MAX_GRID_SIZE
+  end
+
   def valid_move?(move)
     @board.valid_move?(move)
   end
@@ -24,8 +29,8 @@ class Game
     @turn_order = (@turn_order + 1) % @players.length
   end
 
-  def create_grid
-    @board = Board.new(3)
+  def create_grid(size)
+    @board = Board.new(size)
   end
 
   def get_board_with_moves
