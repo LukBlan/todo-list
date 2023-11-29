@@ -129,7 +129,12 @@ class ConsoleInterface
 
     board.each_with_index do |row, row_index|
       row.each_with_index do |element, column_index|
-        txt = " #{element} "
+        if element.to_s.length > 1
+          txt = "  #{element} "
+        else
+          txt = "  #{element}  "
+        end
+
 
         if column_index != row.length - 1
           txt += "|"
@@ -149,7 +154,7 @@ class ConsoleInterface
 
   def get_line_separator(elements)
     line_separator = ""
-    dash_amount = elements * 4 - 1
+    dash_amount = elements * 6 - 1
 
     dash_amount.times { line_separator += "-" }
 
