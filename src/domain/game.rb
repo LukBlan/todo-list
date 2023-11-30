@@ -1,4 +1,3 @@
-require_relative 'human_player'
 require_relative 'board'
 
 class Game
@@ -11,11 +10,6 @@ class Game
     @turn_order = 0
     @marks = ["-", " ", "|"]
     @result = nil
-  end
-
-  def add_human_player(symbol)
-    @marks << symbol
-    @players << HumanPlayer.new(symbol)
   end
 
   def max_grid_size
@@ -81,6 +75,11 @@ class Game
   def get_last_player
     position = (@turn_order - 1) % @players.size
     @players[position]
+  end
+
+  def add_player(player)
+    @marks << player.mark
+    @players << player
   end
 
 end

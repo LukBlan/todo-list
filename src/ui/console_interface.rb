@@ -1,3 +1,5 @@
+require_relative '../domain/human_player.rb'
+require_relative '../domain/ia_player.rb'
 require_relative '../domain/game.rb'
 
 class ConsoleInterface
@@ -36,22 +38,21 @@ class ConsoleInterface
   end
 
   def configure_players
-    mark = nil
+
     players_total = get_total_players
 
     players_total.times do |number|
-      loop do
-        print("      -> Player #{number + 1} mark: ")
-        mark = gets.chomp.downcase
+      mark = get_user_input_mark(number)
+      option = get_player_type_option(number)
 
-        if @game.valid_mark(mark)
-          break
-        end
-
-        puts("Invalid board mark try again")
+      if option == 1
+        player = HumanPlayer.new(mark)
+        @game.add_player(player)
+      else
+        player = Ia_player.new(mark)
+        @game.add_player(player)
       end
 
-      @game.add_human_player(mark)
     end
   end
 
@@ -163,5 +164,33 @@ class ConsoleInterface
 
   def print_format_message(message)
     print("  - #{message}")
+  end
+
+  private
+
+  def get_player_type_option(number)
+    loop do
+      print("      -> Player #{number + 1} Human (1) or Ia (2)?: ")
+      option = gets.chomp.to_i
+
+      if option == 1 || option == 2
+        return option
+      end
+
+      puts("Invalid option, try again")
+    end
+  end
+
+  def get_user_input_mark(number)
+    loop do
+      print("      -> Player #{number + 1} mark: ")
+      mark = gets.chomp.downcase
+
+      if @game.valid_mark(mark)
+        return mark
+      end
+
+      puts("Invalid board mark try again")
+    end
   end
 end
