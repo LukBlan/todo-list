@@ -5,7 +5,7 @@ Console version of the game with dynamic grid size, up to 6 Human or IA players
 ## Demo
 ![Demo](images/demo.gif)
 
-## How to play
+## How to play (Windows 10+ only)
 1. [Download source code](https://github.com/LukBlan/console-tic-tac-toe/archive/refs/heads/main.zip)
 2. Extract downloaded folder
 3. Go to scripts sub folder and double-click on download (it gonna start downloading without installing)
