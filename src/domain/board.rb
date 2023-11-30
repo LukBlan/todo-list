@@ -13,13 +13,6 @@ class Board
     @size = size
   end
 
-  def valid_move?(move)
-    greater_than_zero = move > 0
-    less_than_cell_amounts = (move <= @size * @size)
-    not_marked = is_not_marked(move)
-    greater_than_zero && less_than_cell_amounts && not_marked
-  end
-
   def is_not_marked(move)
     row = (move - 1) / @size
     column = (move - 1) % @size
@@ -133,6 +126,10 @@ class Board
     end
 
     false
+  end
+
+  def get_valid_moves
+    (1..(@size * @size)).filter { |move| is_not_marked(move) }
   end
 
 end

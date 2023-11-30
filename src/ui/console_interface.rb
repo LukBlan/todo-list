@@ -38,7 +38,6 @@ class ConsoleInterface
   end
 
   def configure_players
-
     players_total = get_total_players
 
     players_total.times do |number|
@@ -52,7 +51,6 @@ class ConsoleInterface
         player = Ia_player.new(mark)
         @game.add_player(player)
       end
-
     end
   end
 
@@ -95,22 +93,10 @@ class ConsoleInterface
 
   def game_loop
     while !@game.over?
-      move = self.get_player_move
+      move = @game.execute_turn
       @game.mark_grid(move)
       @game.next_turn
       self.display_result_board
-    end
-  end
-
-  def get_player_move
-    loop do
-      move = @game.execute_turn
-
-      if @game.valid_move?(move)
-        return move
-      end
-
-      puts "Invalid Move: Try Again"
     end
   end
 

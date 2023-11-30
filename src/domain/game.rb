@@ -16,10 +16,6 @@ class Game
     MAX_GRID_SIZE
   end
 
-  def valid_move?(move)
-    @board.valid_move?(move)
-  end
-
   def next_turn
     @turn_order = (@turn_order + 1) % @players.length
   end
@@ -38,7 +34,8 @@ class Game
 
   def execute_turn
     player = get_current_player
-    player.play_turn
+    valid_moves = @board.get_valid_moves
+    player.play_turn(valid_moves)
   end
 
   def mark_grid(move)
