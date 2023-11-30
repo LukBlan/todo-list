@@ -1,6 +1,6 @@
 # Console Tic Tac Toe
 
-Console version of the game, with dynamic grid size, up to 6 Ia or Human players
+Console version of the game, with dynamic grid size, up to 6 Human or IA players
 
 ## Demo
 ![Demo](images/demo.gif)
