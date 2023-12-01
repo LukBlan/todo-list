@@ -1,19 +1,22 @@
 require_relative '../domain/human_player.rb'
 require_relative '../domain/ia_player.rb'
 require_relative '../domain/game.rb'
+require_relative './console_format_message_printer'
 
 class ConsoleInterface
   MAX_AMOUNT_PLAYERS = 6
 
   def initialize
     @game = Game.new
-    @marks = ["-"]
+    @formatter = ConsoleFormatMessagePrinter.new
   end
 
   def init
     self.show_welcome_message
+    puts
     self.configure
     self.show_rules
+    self.display_board_with_moves
     self.game_loop
     self.display_result
   end
@@ -34,7 +37,6 @@ class ConsoleInterface
     puts("------------------------")
     puts(" Welcome to Tic Tac Toe")
     puts("------------------------")
-    puts
   end
 
   def configure_players
@@ -56,7 +58,7 @@ class ConsoleInterface
 
   def get_total_players
     loop do
-      print_format_message("Number of Players? (Max #{MAX_AMOUNT_PLAYERS}): ")
+      @formatter.dash_message("Number of Players? (Max #{MAX_AMOUNT_PLAYERS}): ")
       players_amount = gets.chomp.to_i
 
       if players_amount >= 2 && players_amount <= MAX_AMOUNT_PLAYERS
@@ -71,7 +73,7 @@ class ConsoleInterface
     size = nil
 
     loop do
-      print_format_message("Grid size? (Max: #{@game.max_grid_size}): ")
+      @formatter.dash_message("Grid size? (Max: #{@game.max_grid_size}): ")
       size = gets.chomp.to_i
 
       if size >= 3 && size <= @game.max_grid_size
@@ -86,9 +88,8 @@ class ConsoleInterface
 
   def show_rules
     puts("Rules: ")
-    print_format_message("Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win\n")
-    print_format_message("During the game give one of the following valid moves that are not already marked\n")
-    self.display_board_with_moves
+    @formatter.dash_message("Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win\n")
+    @formatter.dash_message("During the game give one of the following valid moves that are not already marked\n")
   end
 
   def game_loop
@@ -147,12 +148,6 @@ class ConsoleInterface
 
     line_separator
   end
-
-  def print_format_message(message)
-    print("  - #{message}")
-  end
-
-  private
 
   def get_player_type_option(number)
     loop do
