@@ -1,18 +1,17 @@
 require_relative '../domain/human_player.rb'
 require_relative '../domain/ia_player.rb'
 require_relative '../domain/game.rb'
-require_relative './console_format_message_printer'
+require_relative './console_formatter'
 
 class ConsoleInterface
-  MAX_AMOUNT_PLAYERS = 6
-
-  def initialize
-    @game = Game.new
-    @formatter = ConsoleFormatMessagePrinter.new
+  def initialize(game, console_formatter, board_display)
+    @game = game
+    @console_formatter = console_formatter
+    @board_display = board_display
   end
 
   def init
-    self.show_welcome_message
+    @console_formatter.show_message_between_dashes("Welcome to Tic Tac Toe")
     puts
     self.configure
     self.show_rules
@@ -29,14 +28,8 @@ class ConsoleInterface
 
   def display_result
     result = @game.result
-    puts("Game Over!")
+    @console_formatter.show_message_between_dashes("Game Over!")
     puts(result)
-  end
-
-  def show_welcome_message
-    puts("------------------------")
-    puts(" Welcome to Tic Tac Toe")
-    puts("------------------------")
   end
 
   def configure_players
@@ -57,11 +50,13 @@ class ConsoleInterface
   end
 
   def get_total_players
+    max_amount_players = @game.max_amount_of_players
+
     loop do
-      @formatter.dash_message("Number of Players? (Max #{MAX_AMOUNT_PLAYERS}): ")
+      @console_formatter.dash_message("Number of Players? (Max #{max_amount_players}): ")
       players_amount = gets.chomp.to_i
 
-      if players_amount >= 2 && players_amount <= MAX_AMOUNT_PLAYERS
+      if players_amount >= 2 && players_amount <= max_amount_players
         return players_amount
       end
 
@@ -73,7 +68,7 @@ class ConsoleInterface
     size = nil
 
     loop do
-      @formatter.dash_message("Grid size? (Max: #{@game.max_grid_size}): ")
+      @console_formatter.dash_message("Grid size? (Max: #{@game.max_grid_size}): ")
       size = gets.chomp.to_i
 
       if size >= 3 && size <= @game.max_grid_size
@@ -88,13 +83,13 @@ class ConsoleInterface
 
   def show_rules
     puts("Rules: ")
-    @formatter.dash_message("Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win\n")
-    @formatter.dash_message("During the game give one of the following valid moves that are not already marked\n")
+    @console_formatter.dash_message("Your goal is to mark 3 contiguous cells from a row, columns or diagonals to win\n")
+    @console_formatter.dash_message("During the game give one of the following valid moves that are not already marked\n")
   end
 
   def game_loop
     while !@game.over?
-      move = @game.execute_turn
+      move = @game.execute_turn(@console_formatter)
       @game.mark_grid(move)
       @game.next_turn
       self.display_result_board
@@ -103,50 +98,13 @@ class ConsoleInterface
 
   def display_board_with_moves
     board_with_moves = @game.get_board_with_moves
-    display_board(board_with_moves)
+    @board_display.display_board(board_with_moves)
   end
 
   def display_result_board
     puts("Result: ")
     board = @game.get_board
-    display_board(board)
-  end
-
-  def display_board(board)
-    puts
-
-    board.each_with_index do |row, row_index|
-      row.each_with_index do |element, column_index|
-        if element.to_s.length > 1
-          txt = "  #{element} "
-        else
-          txt = "  #{element}  "
-        end
-
-
-        if column_index != row.length - 1
-          txt += "|"
-        end
-        print txt
-      end
-
-      puts
-      if row_index != board.length - 1
-        line_separator = self.get_line_separator(row.length)
-        puts line_separator
-      end
-    end
-
-    puts
-  end
-
-  def get_line_separator(elements)
-    line_separator = ""
-    dash_amount = elements * 6 - 1
-
-    dash_amount.times { line_separator += "-" }
-
-    line_separator
+    @board_display.display_board(board)
   end
 
   def get_player_type_option(number)

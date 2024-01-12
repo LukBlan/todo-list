@@ -2,9 +2,10 @@ require_relative 'board'
 
 class Game
   MAX_GRID_SIZE = 6
-  attr_reader :result
+  attr_reader :result, :max_amount_of_players
 
-  def initialize
+  def initialize(max_amount_of_players)
+    @max_amount_of_players = max_amount_of_players
     @players = []
     @board = nil
     @turn_order = 0
@@ -32,10 +33,10 @@ class Game
     @players[@turn_order]
   end
 
-  def execute_turn
+  def execute_turn(console_formatter)
     player = get_current_player
     valid_moves = @board.get_valid_moves
-    player.play_turn(valid_moves)
+    player.play_turn(valid_moves, console_formatter)
   end
 
   def mark_grid(move)

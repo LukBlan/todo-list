@@ -1,17 +1,14 @@
-require_relative '../ui/console_format_message_printer'
-
 class Ia_player
   attr_reader :mark
 
   def initialize(mark)
     @mark = mark
-    @formatter = ConsoleFormatMessagePrinter.new
   end
 
-  def play_turn(valid_moves)
+  def play_turn(valid_moves, console_formatter)
     move = valid_moves.sample
     puts("Player #{@mark} (Ia) turn")
-    @formatter.move_message(move)
+    console_formatter.move_message(move)
     puts
     move
   end
