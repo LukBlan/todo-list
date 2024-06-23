@@ -3,5 +3,11 @@ This project is organized in branch's, which each branch corresponding to a diff
 
 Click on language name to go to respective language branch
 
-## [Javascript]()
-## [Ruby]()
+## [Javascript](https://github.com/LukBlan/todo-list/tree/html-css-js)
+- **npm**: Package Manager
+- **html**: Language
+- **css**: Language
+- **javascript**: Programming Language
+## [Ruby](https://github.com/LukBlan/todo-list/tree/ruby)
+- **bundle**: Package Manager
+- **ruby**: Programming Language
