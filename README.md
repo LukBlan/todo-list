@@ -5,9 +5,9 @@ Click on language name to go to respective language branch
 
 ## [Javascript](https://github.com/LukBlan/todo-list/tree/html-css-js)
 - **npm**: Package Manager
+- **Webpack**: Module Bundler
 - **html**: Language
 - **css**: Language
 - **javascript**: Programming Language
 ## [Ruby](https://github.com/LukBlan/todo-list/tree/ruby)
-- **bundle**: Package Manager
 - **ruby**: Programming Language
