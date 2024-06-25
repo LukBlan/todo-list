@@ -3,7 +3,7 @@ This project is organized in branch's, which each branch corresponding to a diff
 
 Click on language name to go to respective language branch
 
-## [Javascript](https://github.com/LukBlan/todo-list/tree/html-css-js)
+## [Javascript](https://github.com/LukBlan/todo-list/tree/js)
 - **npm**: Package Manager
 - **Webpack**: Module Bundler
 - **html**: Language
